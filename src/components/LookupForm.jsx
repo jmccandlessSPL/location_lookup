@@ -1,9 +1,26 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function LookupForm() {
   const [location, setLocation] = useState("");
+  const [searchResults, setSearchResults] = useState(null);
+  const [apiError, setApiError] = useState(null);
+
   const baseURL = "https://api.mdm.sandbox.suresuiteapps.com/v1/locations/";
-  useEffect(() => {}, []);
+
+  const retrieveLocations = async (url) => {
+    try {
+      const loc = await axios.get(url);
+      setSearchResults(loc);
+      setApiError(null);
+    } catch (err) {
+      setApiError(err);
+    }
+  };
+
+  useEffect(() => {
+    retrieveLocations(baseURL);
+  }, [baseURL]);
 
   function handleChange(e) {
     e.preventDefault();
@@ -15,7 +32,7 @@ function LookupForm() {
       <div>
         form for search
         <form>
-          <label>
+          <label style={{ backgroundColor: searchResults ? "green" : "red" }}>
             Search for...
             <input
               name="location"
