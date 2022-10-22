@@ -9,19 +9,24 @@ function LookupForm() {
 
   const baseURL = "https://api.mdm.sandbox.suresuiteapps.com/v1/locations/";
 
-  const retrieveLocations = async (url) => {
+  const retrieveLocations = async (url, searchBar) => {
     try {
-      const res = await axios.get(url);
-      setSearchResults(res.data);
+      console.log(searchBar);
+      const res = await axios.get([`${url}`]);
+      setSearchResults(
+        res.data.filter((loc) => loc.locName.includes(`${searchBar}`))
+      );
+      // setSearchResults(res.data.filter((loc) => loc.includes(searchBar)));
       setApiError(null);
     } catch (err) {
       setApiError(err);
     }
   };
 
+  // console.log(location);
   useEffect(() => {
-    retrieveLocations(baseURL);
-  }, [baseURL]);
+    retrieveLocations(baseURL, location);
+  }, [baseURL, location]);
 
   function handleChange(e) {
     e.preventDefault();
