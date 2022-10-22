@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import SearchResults from "./SearchResults";
 
 function LookupForm() {
   const [location, setLocation] = useState("");
@@ -10,8 +11,8 @@ function LookupForm() {
 
   const retrieveLocations = async (url) => {
     try {
-      const loc = await axios.get(url);
-      setSearchResults(loc);
+      const res = await axios.get(url);
+      setSearchResults(res.data);
       setApiError(null);
     } catch (err) {
       setApiError(err);
@@ -42,6 +43,7 @@ function LookupForm() {
             />
           </label>
         </form>
+        {searchResults && <SearchResults searchResults={searchResults} />}
       </div>
     </>
   );
