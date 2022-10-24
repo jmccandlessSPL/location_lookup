@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SearchResults from "./SearchResults";
+import SearchInputTag from "./SearchInputTag";
+/*
+ * This form will be for more than just the location eventually
+ * right now, proof of concept.
+ */
 
 function LookupForm() {
-  const [location, setLocation] = useState("");
+  const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState(null);
   const [apiError, setApiError] = useState(null);
+  const [selectedResult, setSelectedResult] = useState(null);
 
   const baseURL = "https://api.mdm.sandbox.suresuiteapps.com/v1/locations/";
 
@@ -23,14 +29,15 @@ function LookupForm() {
     }
   };
 
-  // console.log(location);
+  // console.log(searchText);
+  console.log(selectedResult);
   useEffect(() => {
-    retrieveLocations(baseURL, location);
-  }, [baseURL, location]);
+    retrieveLocations(baseURL, searchText);
+  }, [baseURL, searchText]);
 
   function handleChange(e) {
     e.preventDefault();
-    setLocation(e.target.value);
+    setSearchText(e.target.value);
   }
 
   return (
@@ -38,17 +45,26 @@ function LookupForm() {
       <div>
         form for search
         <form>
-          <label style={{ backgroundColor: searchResults ? "green" : "red" }}>
+          <label
+            htmlFor="searchText"
+            style={{ backgroundColor: searchResults ? "green" : "red" }}
+          >
             Search for...
             <input
-              name="location"
+              name="searchText"
               type="text"
-              value={location}
+              value={searchText}
               onChange={handleChange}
             />
           </label>
         </form>
-        {searchResults && <SearchResults searchResults={searchResults} />}
+        {searchResults && (
+          <SearchResults
+            searchResults={searchResults}
+            setSelectedResult={setSelectedResult}
+          />
+        )}
+        <SearchInputTag location={selectedResult} />
       </div>
     </>
   );

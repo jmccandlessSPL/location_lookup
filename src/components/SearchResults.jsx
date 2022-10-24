@@ -42,7 +42,7 @@ export const LocationNamingMap = {
   isDeleted: "Deleted",
 };
 
-function SearchResults({ searchResults }) {
+function SearchResults({ searchResults, setSelectedResult }) {
   // console.log(Object.keys(LocationNamingMap));
   const [dataColumns, setDataColumns] = useState([{ field: "id" }]);
 
@@ -79,15 +79,17 @@ function SearchResults({ searchResults }) {
   return (
     <>
       <h2>Data Grid</h2>
-      <Box sx={{ height: 400, width: "100%" }}>
+      <Box sx={{ height: 400, width: "80%" }}>
         <h3>inside box</h3>
         <DataGrid
+          onCellClick={(rowData) => setSelectedResult(rowData.row)}
           rows={searchResults}
           columns={dataColumns}
           pageSize={5}
           rowsPerPageOptions={[5]}
-          checkboxSelection
-          disableSelectionOnClick
+          checkboxSelection={false}
+          disableMultipleSelection={true}
+          // disableSelectionOnClick
         />
       </Box>
     </>
