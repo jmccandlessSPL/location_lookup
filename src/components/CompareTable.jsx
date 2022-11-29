@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { CardHeader, FormControlLabel, Switch } from "@mui/material";
+import {
+  CardHeader,
+  FormControlLabel,
+  Grid,
+  Switch,
+  TextField,
+} from "@mui/material";
 import { LocationNamingMap } from "../util/constants";
 // import { Card } from "@material-ui/core";
 import { Card } from "@mui/material";
@@ -34,8 +40,8 @@ const MergeTableButton = styled(Button)(({ theme }) => ({
 const MergeTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     borderCollapse: "seperate",
-    width: "350px",
-    fontSize: "2rem",
+    width: "200px",
+    // fontSize: "2rem",
     // fontWeight: "400",
     textAlign: "center",
     filter: "brightness(.90)",
@@ -43,15 +49,14 @@ const MergeTableCell = styled(TableCell)(({ theme }) => ({
   },
   [`&.${tableCellClasses.body}`]: {
     borderCollapse: "seperate",
-    fontSize: "1.3rem",
+    // fontSize: "1.3rem",
     padding: 0,
   },
 }));
 
 function CompareTable({
+  handleChange,
   setDataToMerge,
-  setObjToDelete,
-  objToDelete,
   objCompare,
   dataToMerge,
   filteredLocationListFull,
@@ -66,42 +71,27 @@ function CompareTable({
   console.log(objCompare);
   console.log(dataToMerge);
 
-  const [mergeIndex, setMergeIndex] = useState(objCompare ? 0 : "");
-
-  // sets the items to delete to true initially
-  useEffect(() => {
-    // objToDelete &&
-    //   setObjToDelete({
-    //     ...objToDelete,
-    //     isDeleted: true,
-    //   });
-    // dataToMerge &&
-    //   setDataToMerge({
-    //     ...dataToMerge,
-    //   });
-  }, []);
-
   // handles the title color, 3 variations - keep, keep but a value has changed, delete
-  function handleTitleColor(index) {
-    if (mergeIndex === index) {
-      if (_.isEqual(objCompare.at(index), dataToMerge)) {
-        return "selected-data";
-      }
-      return "middle-data";
-    }
-    return "unselected-data";
-  }
+  // function handleTitleColor(index) {
+  //   if (mergeIndex === index) {
+  //     if (_.isEqual(objCompare.at(index), dataToMerge)) {
+  //       return "selected-data";
+  //     }
+  //     return "middle-data";
+  //   }
+  //   return "unselected-data";
+  // }
 
   // handles the icon next to title, should be able to combine with handletitlecolor?
-  function whichIcon(index) {
-    if (mergeIndex === index) {
-      if (_.isEqual(objCompare.at(index), dataToMerge)) {
-        return <CheckIcon />;
-      }
-      return <WarningAmber />;
-    }
-    return <ClearIcon />;
-  }
+  // function whichIcon(index) {
+  //   if (mergeIndex === index) {
+  //     if (_.isEqual(objCompare.at(index), dataToMerge)) {
+  //       return <CheckIcon />;
+  //     }
+  //     return <WarningAmber />;
+  //   }
+  //   return <ClearIcon />;
+  // }
 
   // gives the class name for selected data and not selected data (REFACTOR?)
   // function handleCompareToMerge(attr, index) {
@@ -199,12 +189,12 @@ function CompareTable({
   }
 
   // reassigns values in the dataToMerge object as each cell is clicked JHM 10/19/22
-  function handleSingleRowMergeData(dataTitle, index) {
-    setDataToMerge({
-      ...dataToMerge,
-      [`${dataTitle}`]: objCompare.at(index)[`${dataTitle}`],
-    });
-  }
+  // function handleSingleRowMergeData(dataTitle, index) {
+  //   setDataToMerge({
+  //     ...dataToMerge,
+  //     [`${dataTitle}`]: objCompare.at(index)[`${dataTitle}`],
+  //   });
+  // }
 
   // returns boolean for the disable button functionality
   // function handleDisableButton(attr) {
@@ -233,70 +223,38 @@ function CompareTable({
 
   return (
     <>
-      <Card
-        style={{ display: "flex", flexDirection: "column", height: "inherit" }}
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: "100vh" }}
       >
-        <CardHeader
-          title="Compare and Merge"
-          titleTypographyProps={{ fontSize: "2rem", align: "center" }}
-        />
+        <Card
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            height: "600px",
+            width: "70%",
+          }}
+        >
+          <CardHeader
+            title="Compare"
+            titleTypographyProps={{ align: "center" }}
+          />
 
-        <TableContainer style={{ height: "inherit", display: "flex" }}>
-          <Table stickyHeader style={{ height: "inherit" }}>
-            <TableHead>
-              <TableRow>
-                <MergeTableCell style={{ width: "250px" }}>
-                  Attribute
-                </MergeTableCell>
-                <MergeTableCell
-                  style={{ backgroundColor: "#add2ed", fontWeight: "400px" }}
-                >
-                  Desired Merge Data
-                </MergeTableCell>
-                <MergeTableCell>Firest</MergeTableCell>
-                <MergeTableCell>Seconed</MergeTableCell>
-                {/*{objCompare?.map((el, i) => (*/}
-                {/*  <MergeTableCell key={i} className={`${handleTitleColor(i)}`}>*/}
-                {/*    <div className={`div-inside`}>*/}
-                {/*      {i === 0 && (*/}
-                {/*        <MergeTableButton className={`single-butt`}>*/}
-                {/*          <KeyboardDoubleArrowLeftSharpIcon*/}
-                {/*            onClick={() => {*/}
-                {/*              setMergeIndex(0);*/}
-                {/*              setDataToMerge(objCompare[0]);*/}
-                {/*              setObjToDelete({*/}
-                {/*                ...objCompare[1],*/}
-                {/*                isDeleted: true,*/}
-                {/*              });*/}
-                {/*            }}*/}
-                {/*          />*/}
-                {/*        </MergeTableButton>*/}
-                {/*      )}*/}
-                {/*      {i === 1 && (*/}
-                {/*        <MergeTableButton className={`single-butt`}>*/}
-                {/*          <KeyboardDoubleArrowRightSharpIcon*/}
-                {/*            onClick={() => {*/}
-                {/*              setMergeIndex(1);*/}
-                {/*              setDataToMerge(objCompare[1]);*/}
-                {/*              // setObjToDelete(objCompare[0]);*/}
-                {/*              setObjToDelete({*/}
-                {/*                ...objCompare[0],*/}
-                {/*                isDeleted: true,*/}
-                {/*              });*/}
-                {/*            }}*/}
-                {/*          />*/}
-                {/*        </MergeTableButton>*/}
-                {/*      )}*/}
-                {/*      Location {i + 1}*/}
-                {/*      {whichIcon(i)}*/}
-                {/*    </div>*/}
-                {/*  </MergeTableCell>*/}
-                {/*))}*/}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {objCompare &&
-                Object.keys(objCompare[0])
+          <TableContainer sx={{ height: "inherit", display: "flex" }}>
+            <Table stickyHeader style={{ height: "inherit" }}>
+              <TableHead>
+                <TableRow>
+                  <MergeTableCell>Attribute</MergeTableCell>
+                  <MergeTableCell>First</MergeTableCell>
+                  <MergeTableCell>Second</MergeTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Object.keys(LocationNamingMap)
                   ?.filter(
                     (rowTitle) => rowTitle !== "id" && rowTitle !== "keyy"
                   )
@@ -312,65 +270,31 @@ function CompareTable({
                             {LocationNamingMap[`${rowTitle}`]}
                           </div>
                         </MergeTableCell>
-                        <MergeTableCell
-                          // className="att-name"
-                          style={{
-                            padding: "5px 10px",
-                            backgroundColor: "#add2ed",
-                          }}
-                          align="left"
-                        >
-                          <div className={"div-inside"}>
-                            {handleRowData(rowTitle, dataToMerge)}
+                        <MergeTableCell align="left">
+                          <div className={`div-inside`}>
+                            <TextField
+                              id={rowTitle}
+                              fullWidth
+                              onChange={handleChange}
+                              size="small"
+                            >
+                              {handleRowData(rowTitle, dataToMerge[0])}
+                            </TextField>
                           </div>
                         </MergeTableCell>
-                        <MergeTableCell
-                          // className={` ${handleCompareToMerge(rowTitle, 0)} `}
-                          align="left"
-                        >
+                        <MergeTableCell align="left">
                           <div className={`div-inside`}>
-                            <MergeTableButton
-                            // disabled={handleDisableButton(rowTitle)}
-                            // className={`${handleDisableButtonClass(
-                            //   rowTitle
-                            // )}`}
-                            // onClick={() => {
-                            //   handleDisableButton(rowTitle);
-                            //   handleSingleRowMergeData(rowTitle, 0);
-                            // }}
-                            >
-                              <KeyboardArrowLeftSharpIcon align="right" />
-                            </MergeTableButton>
-
                             {handleRowData(rowTitle, objCompare.at(0))}
-                          </div>
-                        </MergeTableCell>
-                        <MergeTableCell
-                          // className={` ${handleCompareToMerge(rowTitle, 1)}`}
-                          align="left"
-                        >
-                          <div className={`div-inside`}>
-                            <MergeTableButton
-                            // disabled={handleDisableButton(rowTitle)}
-                            // className={`${handleDisableButtonClass(
-                            //   rowTitle
-                            // )}`}
-                            // onClick={() => {
-                            //   handleSingleRowMergeData(rowTitle, 1);
-                            // }}
-                            >
-                              <KeyboardArrowRightSharpIcon />
-                            </MergeTableButton>
-                            {handleRowData(rowTitle, dataToMerge[0])}
                           </div>
                         </MergeTableCell>
                       </TableRow>
                     );
                   })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Card>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Card>
+      </Grid>
     </>
   );
 }

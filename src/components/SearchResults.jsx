@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { LocationNamingMap } from "../util/constants";
 
@@ -39,20 +39,28 @@ function SearchResults({ searchResults, setSelectedResult }) {
 
   return (
     <>
-      <h2>Data Grid</h2>
-      <Box sx={{ height: "600px", width: "80%" }}>
-        <h3>inside box</h3>
-        <DataGrid
-          onCellClick={(rowData) => setSelectedResult(rowData.row)}
-          rows={searchResults}
-          columns={dataColumns}
-          pageSize={10}
-          rowsPerPageOptions={[10]}
-          checkboxSelection={false}
-          disableMultipleSelection={true}
-          // disableSelectionOnClick
-        />
-      </Box>
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: "100vh" }}
+      >
+        <h2>Data Grid</h2>
+        <Box height="600px" width="70%">
+          <DataGrid
+            onCellClick={(rowData) => setSelectedResult(rowData.row)}
+            rows={searchResults}
+            columns={dataColumns}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
+            checkboxSelection={false}
+            disableMultipleSelection={true}
+            // disableSelectionOnClick
+          />
+        </Box>
+      </Grid>
     </>
   );
 }
