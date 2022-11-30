@@ -1,48 +1,19 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import SearchResults from "./SearchResults";
 import { LocationNamingMap } from "../util/constants";
-import SearchInputTag from "./SearchInputTag";
-import CompareTable from "./CompareTable";
-import { Box, FormControl, TextField } from "@mui/material";
+import { Autocomplete, Box, FormControl, TextField } from "@mui/material";
+import { useForm, Controller } from "react-hook-form";
 
-/*
- * This form will be for more than just the location eventually
- * right now, proof of concept.
- */
-
-function LookupForm({
-  setApiError,
-  setFullList,
-  setSearchResults,
-  selectedResult,
-  searchResults,
-  handleChange,
-}) {
-  const baseURL = "https://api.mdm.sandbox.suresuiteapps.com/v1/locations/";
-
-  const retrieveLocations = async (url) => {
-    try {
-      setApiError(null);
-      const res = await axios.get([`${url}`]);
-      return res.data;
-    } catch (err) {
-      setApiError(err);
-    }
-  };
-
-  useEffect(() => {
-    retrieveLocations(baseURL).then((data) => {
-      setFullList(data);
-      setSearchResults(data);
-    });
-  }, [baseURL]);
-
-  console.log(selectedResult);
+function LookupForm({ searchResults, handleChange, searchObj, compareScreen }) {
+  // this function allows the field to read the value as it updates from CompareTable
+  function handleName(obj, k) {
+    console.log(obj, k);
+    console.log(obj[`${k}`]);
+    return obj[`${k}`];
+  }
 
   return (
     <>
-      <div>
+      <Box display={compareScreen ? "none" : ""}>
         <h2
           style={{
             outline: "solid",
@@ -64,11 +35,13 @@ function LookupForm({
                 onChange={handleChange}
                 label={val}
                 id={key}
+                name={key}
+                value={handleName(searchObj, key)}
               />
             ))}
           </Box>
         </FormControl>
-      </div>
+      </Box>
     </>
   );
 }

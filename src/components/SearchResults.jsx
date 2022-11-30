@@ -2,9 +2,35 @@ import React, { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { LocationNamingMap } from "../util/constants";
+import axios from "axios";
 
-function SearchResults({ searchResults, setSelectedResult }) {
+function SearchResults({
+  searchResults,
+  setSelectedResult,
+  setApiError,
+  setFullList,
+  setSearchResults,
+}) {
   const [dataColumns, setDataColumns] = useState([{ field: "id" }]);
+
+  const baseURL = "https://api.mdm.sandbox.suresuiteapps.com/v1/locations/";
+
+  const retrieveLocations = async (url) => {
+    try {
+      setApiError(null);
+      const res = await axios.get([`${url}`]);
+      return res.data;
+    } catch (err) {
+      setApiError(err);
+    }
+  };
+
+  useEffect(() => {
+    retrieveLocations(baseURL).then((data) => {
+      setFullList(data);
+      setSearchResults(data);
+    });
+  }, [baseURL]);
 
   useEffect(() => {
     setDataColumns(
@@ -51,7 +77,7 @@ function SearchResults({ searchResults, setSelectedResult }) {
         <Box height="600px" width="70%">
           <DataGrid
             onCellClick={(rowData) => setSelectedResult(rowData.row)}
-            rows={searchResults}
+            rows={searchResults || []}
             columns={dataColumns}
             pageSize={10}
             rowsPerPageOptions={[10]}
