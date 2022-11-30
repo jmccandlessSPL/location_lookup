@@ -19,41 +19,21 @@ import TableRow from "@mui/material/TableRow";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import { styled } from "@mui/material/styles";
-import CheckIcon from "@mui/icons-material/Check";
-import ClearIcon from "@mui/icons-material/Clear";
-import KeyboardDoubleArrowLeftSharpIcon from "@mui/icons-material/KeyboardDoubleArrowLeftSharp";
-import KeyboardDoubleArrowRightSharpIcon from "@mui/icons-material/KeyboardDoubleArrowRightSharp";
-import KeyboardArrowLeftSharpIcon from "@mui/icons-material/KeyboardArrowLeftSharp";
-import KeyboardArrowRightSharpIcon from "@mui/icons-material/KeyboardArrowRightSharp";
-import Button from "@mui/material/Button";
-import { WarningAmber } from "@mui/icons-material";
+import ReactDiffViewer, { DiffMethod } from "react-diff-viewer";
+import { useMemo } from "react";
+import ReactDOM from "react-dom";
+import { Input } from "antd";
+import { diffLines, formatLines } from "unidiff";
+import { parseDiff, Diff, Hunk } from "react-diff-view";
+import { useInput } from "./hooks";
 
-const MergeTableButton = styled(Button)(({ theme }) => ({
-  borderRadius: "7px",
-  padding: "1px 2px",
-  minWidth: "max-content",
-  maxWait: "max-content",
-  ":hover": {
-    backgroundColor: "rgba(0,0,0,0.35)",
-  },
-}));
+// import "antd/dist/antd.min.css";
+import "react-diff-view/style/index.css";
+// import "./styles.css";
 
-const MergeTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    borderCollapse: "seperate",
-    width: "200px",
-    // fontSize: "2rem",
-    // fontWeight: "400",
-    textAlign: "center",
-    filter: "brightness(.90)",
-    // padding: "5px 10px",
-  },
-  [`&.${tableCellClasses.body}`]: {
-    borderCollapse: "seperate",
-    // fontSize: "1.3rem",
-    padding: 0,
-  },
-}));
+import tokenize from "./tokenize";
+
+const EMPTY_HUNKS = [];
 
 function CompareTable({
   handleChange,
@@ -70,162 +50,81 @@ function CompareTable({
     updatedBy: true,
   };
 
-  // console.log(objCompare);
-  // console.log(dataToMerge);
+  const [totalCompFieldsArr, setTotalCompFieldsArr] = useState([
+    ...new Set([...Object.keys(objCompare), ...Object.keys(dataToMerge)]),
+  ]);
 
-  // handles the title color, 3 variations - keep, keep but a value has changed, delete
-  // function handleTitleColor(index) {
-  //   if (mergeIndex === index) {
-  //     if (_.isEqual(objCompare.at(index), dataToMerge)) {
-  //       return "selected-data";
-  //     }
-  //     return "middle-data";
-  //   }
-  //   return "unselected-data";
-  // }
+  const [oldText, setOldText] = useState("");
+  const [newText, setNewText] = useState("");
 
-  // handles the icon next to title, should be able to combine with handletitlecolor?
-  // function whichIcon(index) {
-  //   if (mergeIndex === index) {
-  //     if (_.isEqual(objCompare.at(index), dataToMerge)) {
-  //       return <CheckIcon />;
-  //     }
-  //     return <WarningAmber />;
-  //   }
-  //   return <ClearIcon />;
-  // }
+  // // const oldText = useInput(objCompare[0].locName);
+  // // const newText = useInput(objCompare[1].locName);
+  const [{ type, hunks }, setDiff] = useState("");
+  const updateDiffText = useEffect(() => {
+    const diffText = formatLines(diffLines(oldText, newText), {
+      context: 3,
+    });
+    const [diff] = parseDiff(diffText, { nearbySequences: "zip" });
+    setDiff(diff);
+    console.log(diffText);
+    console.log([diff]);
+  }, [oldText, newText]);
 
-  // gives the class name for selected data and not selected data (REFACTOR?)
-  // function handleCompareToMerge(attr, index) {
-  //   if (_.isEqual(objCompare.at(0)[`${attr}`], objCompare.at(1)[`${attr}`])) {
-  //     if (mergeIndex === index) {
-  //       return "selected-data";
-  //     }
-  //     return "unselected-data";
-  //   }
-  //   if (!_.isEqual(objCompare.at(0)[`${attr}`], objCompare.at(1)[`${attr}`])) {
-  //     if (_.isEqual(objCompare.at(index)[`${attr}`], dataToMerge[`${attr}`])) {
-  //       return "selected-data";
-  //     }
-  //     return "unselected-data";
-  //   }
-  // }
+  console.log("type", type);
+  console.log("hunk", hunks);
 
-  // function to handle coordinates and other nested objects at some point. JHM 10/19/22
-  function handleRowData(data, source) {
-    const nestObjData = source[`${data}`];
-    // if (source === dataToMerge[0]) {
-    //   console.log("dtm");
-    //   console.log(nestObjData);
-    // }
-    // console.log(data, source);
+  const tokens = useMemo(() => tokenize(hunks), [hunks]);
+  console.log(diffLines(newText, oldText));
+  console.log(formatLines(diffLines(newText, oldText)));
+  console.log(parseDiff(newText));
+  // const files = parseDiff(newText, oldText);
+  const files = parseDiff("text3");
+  console.log(files);
+  const renderFile = ({ oldRevision, newRevision, type, hunks }) => (
+    <Diff
+      key={`${oldRevision}-${newRevision}`}
+      viewType="split"
+      diffType={type}
+      hunks={hunks || EMPTY_HUNKS}
+      // tokens={tokens}
+      gutterType={"none"}
+    >
+      {(hunks) => hunks.map((hunk) => <Hunk key={hunk.content} hunk={hunk} />)}
+    </Diff>
+  );
 
-    if (data === "isDeleted") {
-      if (nestObjData) {
-        return nestObjData.toString();
-      }
-      return "";
+  // console.log(totalCompFieldsArr);
+
+  function createText(obj) {
+    let text = ``;
+    let text2 = ``;
+    for (const att of totalCompFieldsArr) {
+      text = text.concat(`
+      ${att}: ${obj[`${att}`] || ""}`);
+      // return `
+      //   <span>
+      //     ${text}
+      //     <button>clickme</button>
+      //   </span>
+      // `;
     }
-    if (data === "isActive") {
-      if (nestObjData) {
-        return nestObjData.toString();
-      }
-      return "";
-    }
-    if (data === "parentLocId") {
-      // returns the name of the parent id instead of just the ID
-      if (
-        filteredLocationListFull?.filter((local) => local.id === nestObjData)[0]
-      ) {
-        return filteredLocationListFull?.filter(
-          (local) => local.id === nestObjData
-        )[0].locName;
-      }
-      return "[null]";
-    }
-    if (data === "createdOn" || data === "updatedOn") {
-      if (
-        // these to make sure that we are comparing dates
-        nestObjData?.length === new Date().toISOString().length &&
-        nestObjData?.at(4) === "-" &&
-        nestObjData?.at(-1) === "Z"
-      ) {
-        return new Date(nestObjData).toLocaleString();
-      }
-    }
-    if (data === "coordLonLat") {
-      if (nestObjData) {
-        if (nestObjData === null) {
-          return "[null]";
-        }
-        return `${nestObjData.lat || "[null]"}, ${nestObjData.lng || "[null]"}`;
-      }
-      return "";
-    }
-    if (data === "locationChars") {
-      if (nestObjData) {
-        const isEmptyObjectBool =
-          Object.keys(nestObjData).length === 0 &&
-          nestObjData.constructor === Object;
-        if (!isEmptyObjectBool) {
-          // return a list of each piece of data in this object
-          return (
-            <ul>
-              {Object.entries(nestObjData).map(([key, val], i) => {
-                return (
-                  <li key={i}>
-                    {key}: {val}
-                  </li>
-                );
-              })}
-            </ul>
-          );
-        }
-        return "[null]";
-      }
-      return "";
-    }
-    if (nestObjData === null) {
-      return "[null]";
-    }
-    if (nestObjData === "") {
-      return "[empty]";
-    }
-    return nestObjData;
+    // Object.entries(obj).map(([key, value], i) => {
+    //   text2 = text2.concat(`
+    //   ${key}: ${value}`);
+    // return `
+    //   <span>
+    //     ${text2}
+    //     <button>clickme</button>
+    //   </span>
+    // `;
+    // });
+    console.log(text);
+    console.log(text2);
+    return text;
   }
 
-  // reassigns values in the dataToMerge object as each cell is clicked JHM 10/19/22
-  // function handleSingleRowMergeData(dataTitle, index) {
-  //   setDataToMerge({
-  //     ...dataToMerge,
-  //     [`${dataTitle}`]: objCompare.at(index)[`${dataTitle}`],
-  //   });
-  // }
-
-  // returns boolean for the disable button functionality
-  // function handleDisableButton(attr) {
-  //   return (
-  //     uneditableAttr[`${attr}`] ||
-  //     _.isEqual(objCompare.at(0)[`${attr}`], objCompare.at(1)[`${attr}`])
-  //   );
-  // }
-
-  // give the disable button class to the element
-  // function handleDisableButtonClass(attr) {
-  //   if (handleDisableButton(attr)) {
-  //     return "disable-butt";
-  //   }
-  //   return "single-butt";
-  // }
-
-  // able to edit the merge data fields
-  // function handleMergeDataInput(e, attr) {
-  //   e.preventDefault();
-  //   setDataToMerge({
-  //     ...dataToMerge,
-  //     [`${attr}`]: e.target.value,
-  //   });
-  // }
+  const text1 = createText(dataToMerge);
+  const text2 = createText(objCompare);
 
   return (
     <>
@@ -237,71 +136,83 @@ function CompareTable({
           alignItems="center"
           justify="center"
         >
-          <Card
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              height: "600px",
-              width: "70%",
-            }}
-          >
-            <CardHeader
-              title="Compare"
-              titleTypographyProps={{ align: "center" }}
+          <Box>
+            <h2>diff viewer</h2>
+            <ReactDiffViewer
+              rightTitle={"New Location"}
+              leftTitle={"Old Location"}
+              oldValue={text1}
+              newValue={text2}
+              splitView={true}
+              hideLineNumbers={true}
+              onLineNumberClick={(lineId) => console.log("click")}
             />
+          </Box>
+          {/*    <Card*/}
+          {/*      sx={{*/}
+          {/*        display: "flex",*/}
+          {/*        flexDirection: "column",*/}
+          {/*        height: "600px",*/}
+          {/*        width: "70%",*/}
+          {/*      }}*/}
+          {/*    >*/}
+          {/*      <CardHeader*/}
+          {/*        title="Compare"*/}
+          {/*        titleTypographyProps={{ align: "center" }}*/}
+          {/*      />*/}
 
-            <TableContainer sx={{ height: "inherit", display: "flex" }}>
-              <Table stickyHeader style={{ height: "inherit" }}>
-                <TableHead>
-                  <TableRow>
-                    <MergeTableCell>Attribute</MergeTableCell>
-                    <MergeTableCell>First</MergeTableCell>
-                    <MergeTableCell>Second</MergeTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {Object.keys(LocationNamingMap)
-                    ?.filter(
-                      (rowTitle) => rowTitle !== "id" && rowTitle !== "keyy"
-                    )
-                    .map((rowTitle, i) => {
-                      return (
-                        <TableRow key={i}>
-                          <MergeTableCell
-                            className="att-name"
-                            style={{ padding: "5px 10px" }}
-                            align="left"
-                          >
-                            <div className={`div-inside`}>
-                              {LocationNamingMap[`${rowTitle}`]}
-                            </div>
-                          </MergeTableCell>
-                          <MergeTableCell align="left">
-                            <div className={`div-inside`}>
-                              <TextField
-                                id={`${rowTitle}`}
-                                name={`${rowTitle}`}
-                                fullWidth
-                                onChange={handleChange}
-                                size="small"
-                                value={handleRowData(rowTitle, dataToMerge)}
-                              />
-                              {/*{handleRowData(rowTitle, dataToMerge[0])}*/}
-                              {/*</TextField>*/}
-                            </div>
-                          </MergeTableCell>
-                          <MergeTableCell align="left">
-                            <div className={`div-inside`}>
-                              {handleRowData(rowTitle, objCompare)}
-                            </div>
-                          </MergeTableCell>
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Card>
+          {/*      <TableContainer sx={{ height: "inherit", display: "flex" }}>*/}
+          {/*        <Table stickyHeader style={{ height: "inherit" }}>*/}
+          {/*          <TableHead>*/}
+          {/*            <TableRow>*/}
+          {/*              <MergeTableCell>Attribute</MergeTableCell>*/}
+          {/*              <MergeTableCell>First</MergeTableCell>*/}
+          {/*              <MergeTableCell>Second</MergeTableCell>*/}
+          {/*            </TableRow>*/}
+          {/*          </TableHead>*/}
+          {/*          <TableBody>*/}
+          {/*            {Object.keys(LocationNamingMap)*/}
+          {/*              ?.filter(*/}
+          {/*                (rowTitle) => rowTitle !== "id" && rowTitle !== "keyy"*/}
+          {/*              )*/}
+          {/*              .map((rowTitle, i) => {*/}
+          {/*                return (*/}
+          {/*                  <TableRow key={i}>*/}
+          {/*                    <MergeTableCell*/}
+          {/*                      className="att-name"*/}
+          {/*                      style={{ padding: "5px 10px" }}*/}
+          {/*                      align="left"*/}
+          {/*                    >*/}
+          {/*                      <div className={`div-inside`}>*/}
+          {/*                        {LocationNamingMap[`${rowTitle}`]}*/}
+          {/*                      </div>*/}
+          {/*                    </MergeTableCell>*/}
+          {/*                    <MergeTableCell align="left">*/}
+          {/*                      <div className={`div-inside`}>*/}
+          {/*                        <TextField*/}
+          {/*                          id={`${rowTitle}`}*/}
+          {/*                          name={`${rowTitle}`}*/}
+          {/*                          fullWidth*/}
+          {/*                          onChange={handleChange}*/}
+          {/*                          size="small"*/}
+          {/*                          value={handleRowData(rowTitle, dataToMerge)}*/}
+          {/*                        />*/}
+          {/*                        /!*{handleRowData(rowTitle, dataToMerge[0])}*!/*/}
+          {/*                        /!*</TextField>*!/*/}
+          {/*                      </div>*/}
+          {/*                    </MergeTableCell>*/}
+          {/*                    <MergeTableCell align="left">*/}
+          {/*                      <div className={`div-inside`}>*/}
+          {/*                        {handleRowData(rowTitle, objCompare)}*/}
+          {/*                      </div>*/}
+          {/*                    </MergeTableCell>*/}
+          {/*                  </TableRow>*/}
+          {/*                );*/}
+          {/*              })}*/}
+          {/*          </TableBody>*/}
+          {/*        </Table>*/}
+          {/*      </TableContainer>*/}
+          {/*    </Card>*/}
         </Grid>
       </Box>
     </>

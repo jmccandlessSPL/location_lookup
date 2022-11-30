@@ -52,8 +52,6 @@ function MainPage() {
     }
   }
 
-  console.log(searchObj);
-
   ////// FileSystemAccessAPI ///////
 
   return (
