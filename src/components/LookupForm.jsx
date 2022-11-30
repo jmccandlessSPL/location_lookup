@@ -1,48 +1,47 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { LocationNamingMap } from "../util/constants";
+import { Autocomplete, Box, FormControl, TextField } from "@mui/material";
+import { useForm, Controller } from "react-hook-form";
 
-function LookupForm() {
-  const [location, setLocation] = useState("");
-  const [searchResults, setSearchResults] = useState(null);
-  const [apiError, setApiError] = useState(null);
-
-  const baseURL = "https://api.mdm.sandbox.suresuiteapps.com/v1/locations/";
-
-  const retrieveLocations = async (url) => {
-    try {
-      const loc = await axios.get(url);
-      setSearchResults(loc);
-      setApiError(null);
-    } catch (err) {
-      setApiError(err);
-    }
-  };
-
-  useEffect(() => {
-    retrieveLocations(baseURL);
-  }, [baseURL]);
-
-  function handleChange(e) {
-    e.preventDefault();
-    setLocation(e.target.value);
+function LookupForm({ searchResults, handleChange, searchObj, compareScreen }) {
+  // this function allows the field to read the value as it updates from CompareTable
+  function handleName(obj, k) {
+    console.log(obj, k);
+    console.log(obj[`${k}`]);
+    return obj[`${k}`];
   }
 
   return (
     <>
-      <div>
-        form for search
-        <form>
-          <label style={{ backgroundColor: searchResults ? "green" : "red" }}>
-            Search for...
-            <input
-              name="location"
-              type="text"
-              value={location}
-              onChange={handleChange}
-            />
-          </label>
-        </form>
-      </div>
+      <Box display={compareScreen ? "none" : ""}>
+        <h2
+          style={{
+            outline: "solid",
+            outlineColor: searchResults ? "green" : "red",
+          }}
+        >
+          form for search
+        </h2>
+        <br />
+        <FormControl>
+          <Box>
+            {Object.entries(LocationNamingMap).map(([key, val], i) => (
+              <TextField
+                sx={{ margin: "5px 10px" }}
+                key={i}
+                size="small"
+                // margin="dense"
+                variant="outlined"
+                onChange={handleChange}
+                label={val}
+                id={key}
+                name={key}
+                value={handleName(searchObj, key)}
+              />
+            ))}
+          </Box>
+        </FormControl>
+      </Box>
     </>
   );
 }
