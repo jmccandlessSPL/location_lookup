@@ -20,7 +20,7 @@ export const LocationNamingMap = {
   addrState: "Address State",
   addrCounty: "Address County",
   coordLonLat: "Coordinates",
-  lon: "Longitude",
+  lng: "Longitude",
   lat: "Latitude",
   name: "Name",
   val: "Value",

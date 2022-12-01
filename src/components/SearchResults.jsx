@@ -25,8 +25,18 @@ function SearchResults({
     }
   };
 
+  function dateAdjust(isoDate) {
+    return new Date(isoDate).toLocaleString();
+  }
+
   useEffect(() => {
     retrieveLocations(baseURL).then((data) => {
+      console.log(data);
+      data.forEach((el) => {
+        el.createdOn = dateAdjust(el.createdOn);
+        el.updatedOn = dateAdjust(el.updatedOn);
+      });
+      console.log(data);
       setFullList(data);
       setSearchResults(data);
     });
@@ -43,25 +53,6 @@ function SearchResults({
       })
     );
   }, []);
-
-  // const columns = [
-  //   { field: "id", headerName: "ID", width: 90 },
-  //   {
-  //     field: "firstName",
-  //     headerName: "First name",
-  //     width: 150,
-  //     editable: true,
-  //   },
-  //   {
-  //     field: "fullName",
-  //     headerName: "Full name",
-  //     description: "This column has a value getter and is not sortable.",
-  //     sortable: false,
-  //     width: 160,
-  //     valueGetter: (params) =>
-  //       `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  //   },
-  // ];
 
   return (
     <>

@@ -13,6 +13,29 @@ function CompareTable({ objCompare, dataToMerge, compareScreen }) {
   const [inputText, setInputText] = useState("");
   const [compareText, setCompareText] = useState("");
 
+  function nestedObjManipNONORIG(obj) {
+    const flattened = {};
+
+    Object.keys(obj).forEach((key) => {
+      const value = obj[key];
+
+      if (
+        typeof value === "object" &&
+        value !== null &&
+        !Array.isArray(value)
+      ) {
+        Object.assign(flattened, nestedObjManipNONORIG(value));
+      } else {
+        flattened[key] = value;
+      }
+    });
+
+    return flattened;
+  }
+
+  console.log(objCompare);
+  // console.log(nestedObjManipNONORIG(objCompare));
+
   const [{ hunks }] = useState("");
 
   useMemo(() => tokenize(hunks), [hunks]);
@@ -40,7 +63,6 @@ function CompareTable({ objCompare, dataToMerge, compareScreen }) {
           direction="column"
           alignItems="center"
           justify="center"
-          // sx={{ width: "40%" }}
         >
           <Box>
             <h3>Compare Table</h3>
@@ -79,71 +101,6 @@ function CompareTable({ objCompare, dataToMerge, compareScreen }) {
               }}
             />
           </Box>
-          {/*    <Card*/}
-          {/*      sx={{*/}
-          {/*        display: "flex",*/}
-          {/*        flexDirection: "column",*/}
-          {/*        height: "600px",*/}
-          {/*        width: "70%",*/}
-          {/*      }}*/}
-          {/*    >*/}
-          {/*      <CardHeader*/}
-          {/*        title="Compare"*/}
-          {/*        titleTypographyProps={{ align: "center" }}*/}
-          {/*      />*/}
-
-          {/*      <TableContainer sx={{ height: "inherit", display: "flex" }}>*/}
-          {/*        <Table stickyHeader style={{ height: "inherit" }}>*/}
-          {/*          <TableHead>*/}
-          {/*            <TableRow>*/}
-          {/*              <MergeTableCell>Attribute</MergeTableCell>*/}
-          {/*              <MergeTableCell>First</MergeTableCell>*/}
-          {/*              <MergeTableCell>Second</MergeTableCell>*/}
-          {/*            </TableRow>*/}
-          {/*          </TableHead>*/}
-          {/*          <TableBody>*/}
-          {/*            {Object.keys(LocationNamingMap)*/}
-          {/*              ?.filter(*/}
-          {/*                (rowTitle) => rowTitle !== "id" && rowTitle !== "keyy"*/}
-          {/*              )*/}
-          {/*              .map((rowTitle, i) => {*/}
-          {/*                return (*/}
-          {/*                  <TableRow key={i}>*/}
-          {/*                    <MergeTableCell*/}
-          {/*                      className="att-name"*/}
-          {/*                      style={{ padding: "5px 10px" }}*/}
-          {/*                      align="left"*/}
-          {/*                    >*/}
-          {/*                      <div className={`div-inside`}>*/}
-          {/*                        {LocationNamingMap[`${rowTitle}`]}*/}
-          {/*                      </div>*/}
-          {/*                    </MergeTableCell>*/}
-          {/*                    <MergeTableCell align="left">*/}
-          {/*                      <div className={`div-inside`}>*/}
-          {/*                        <TextField*/}
-          {/*                          id={`${rowTitle}`}*/}
-          {/*                          name={`${rowTitle}`}*/}
-          {/*                          fullWidth*/}
-          {/*                          onChange={handleChange}*/}
-          {/*                          size="small"*/}
-          {/*                          value={handleRowData(rowTitle, dataToMerge)}*/}
-          {/*                        />*/}
-          {/*                        /!*{handleRowData(rowTitle, dataToMerge[0])}*!/*/}
-          {/*                        /!*</TextField>*!/*/}
-          {/*                      </div>*/}
-          {/*                    </MergeTableCell>*/}
-          {/*                    <MergeTableCell align="left">*/}
-          {/*                      <div className={`div-inside`}>*/}
-          {/*                        {handleRowData(rowTitle, objCompare)}*/}
-          {/*                      </div>*/}
-          {/*                    </MergeTableCell>*/}
-          {/*                  </TableRow>*/}
-          {/*                );*/}
-          {/*              })}*/}
-          {/*          </TableBody>*/}
-          {/*        </Table>*/}
-          {/*      </TableContainer>*/}
-          {/*    </Card>*/}
         </Grid>
       </Box>
     </>
