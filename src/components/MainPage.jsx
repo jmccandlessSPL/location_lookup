@@ -4,6 +4,7 @@ import SearchResults from "./SearchResults";
 import CompareTable from "./CompareTable";
 import Button from "@mui/material/Button";
 import { LocationNamingMap } from "../util/constants";
+import { Box } from "@mui/material";
 
 function MainPage() {
   // fulllist so it only calls API once
@@ -59,27 +60,29 @@ function MainPage() {
       <h3>Main page</h3>
       <Button onClick={() => setCompareScreen(false)}>Input</Button>
       <Button onClick={() => setCompareScreen(true)}>Compare</Button>
-      <LookupForm
-        compareScreen={compareScreen}
-        searchObj={searchObj}
-        searchResults={searchResults}
-        handleChange={handleChange}
-      />
-      <CompareTable
-        compareScreen={compareScreen}
-        filteredLocationListFull={searchResults}
-        dataToMerge={searchObj}
-        objCompare={selectedResult}
-        handleChange={handleChange}
-      />
+      <Box display="flex" flexDirection="row" justifyContent="space-around">
+        <LookupForm
+          compareScreen={compareScreen}
+          searchObj={searchObj}
+          searchResults={searchResults}
+          handleChange={handleChange}
+        />
+        <CompareTable
+          compareScreen={compareScreen}
+          filteredLocationListFull={searchResults}
+          dataToMerge={searchObj}
+          objCompare={selectedResult}
+          handleChange={handleChange}
+        />
 
-      <SearchResults
-        searchResults={searchResults}
-        setSelectedResult={setSelectedResult}
-        setApiError={setApiError}
-        setFullList={setFullList}
-        setSearchResults={setSearchResults}
-      />
+        <SearchResults
+          searchResults={searchResults}
+          setSelectedResult={setSelectedResult}
+          setApiError={setApiError}
+          setFullList={setFullList}
+          setSearchResults={setSearchResults}
+        />
+      </Box>
     </>
   );
 }

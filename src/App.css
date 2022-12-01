@@ -38,40 +38,18 @@
   }
 }
 
-table {
-  table-layout: fixed;
-  display: flex;
-  flex-flow: column;
-}
-
-/*tbody, thead {*/
-/*    display: flex;*/
-/*    position: relative;*/
-/*    flex-direction: column;*/
-
-/*}*/
 tr {
-  /*display: flex;*/
-  /*width: min-content;*/
-  /*align-content: flex-start;*/
+  text-align: left;
+
 }
 
 tr:nth-child(even) > td {
   filter: brightness(.90);
 }
 
-th, td {
-  /*padding: 5px 10px;*/
-  /*width: 300px;*/
-  position: relative;
+pre {
+  font-family: inherit;
+  /*display: flex;*/
+  /*flex-direction: row;*/
 }
 
-th {
-  height: 75px;
-  line-height: 75px;
-  font-size: 17px;
-  position: relative;
-  font-weight: 400;
-  text-align: center;
-  background-color: #0000000d;
-}
