@@ -4,6 +4,7 @@ import SearchResults from "./SearchResults";
 import CompareTable from "./CompareTable";
 import Button from "@mui/material/Button";
 import { LocationNamingMap } from "../util/constants";
+import axios from "axios";
 
 function MainPage() {
   // fulllist so it only calls API once
@@ -11,6 +12,24 @@ function MainPage() {
 
   // searchText is what is typed by user
   const [searchText, setSearchText] = useState("");
+
+  const baseURL = "http://localhost:3785";
+
+  const retrieveLocations = async (url) => {
+    try {
+      setApiError(null);
+      const res = await axios.get([`${url}`]);
+      return res.data;
+    } catch (err) {
+      setApiError(err);
+    }
+  };
+
+  useEffect(() => {
+    retrieveLocations(baseURL).then((data) => {
+      console.log(data);
+    });
+  }, [baseURL]);
 
   // searchObj so the object fills in as the user types
   const [searchObj, setSearchObj] = useState(

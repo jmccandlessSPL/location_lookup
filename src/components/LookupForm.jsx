@@ -6,8 +6,6 @@ import { useForm, Controller } from "react-hook-form";
 function LookupForm({ searchResults, handleChange, searchObj, compareScreen }) {
   // this function allows the field to read the value as it updates from CompareTable
   function handleName(obj, k) {
-    console.log(obj, k);
-    console.log(obj[`${k}`]);
     return obj[`${k}`];
   }
 
