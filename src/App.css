@@ -37,3 +37,19 @@
     transform: rotate(360deg);
   }
 }
+
+tr {
+  text-align: left;
+
+}
+
+tr:nth-child(even) > td {
+  filter: brightness(.90);
+}
+
+pre {
+  font-family: inherit;
+  /*display: flex;*/
+  /*flex-direction: row;*/
+}
+

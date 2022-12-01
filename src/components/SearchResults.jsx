@@ -65,28 +65,28 @@ function SearchResults({
 
   return (
     <>
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justify="center"
-        style={{ minHeight: "100vh" }}
-      >
+      {/*<Grid*/}
+      {/*  container*/}
+      {/*  spacing={0}*/}
+      {/*  direction="column"*/}
+      {/*  alignItems="center"*/}
+      {/*  justify="center"*/}
+      {/*  style={{ minHeight: "100vh" }}*/}
+      {/*>*/}
+      <Box height="600px" width="50%">
         <h2>Data Grid</h2>
-        <Box height="600px" width="70%">
-          <DataGrid
-            onCellClick={(rowData) => setSelectedResult(rowData.row)}
-            rows={searchResults || []}
-            columns={dataColumns}
-            pageSize={10}
-            rowsPerPageOptions={[10]}
-            checkboxSelection={false}
-            disableMultipleSelection={true}
-            // disableSelectionOnClick
-          />
-        </Box>
-      </Grid>
+        <DataGrid
+          onCellClick={(rowData) => setSelectedResult(rowData.row)}
+          rows={searchResults || []}
+          columns={dataColumns}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          checkboxSelection={false}
+          disableMultipleSelection={true}
+          // disableSelectionOnClick
+        />
+      </Box>
+      {/*</Grid>*/}
     </>
   );
 }
