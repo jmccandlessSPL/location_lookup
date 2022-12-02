@@ -33,7 +33,7 @@ function CompareTable({ objCompare, dataToMerge, compareScreen }) {
 
   return (
     <>
-      <Box display={compareScreen ? "" : "none"}>
+      <Box>
         <Grid
           container
           spacing={0}

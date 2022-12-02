@@ -10,7 +10,7 @@ function LookupForm({ searchResults, handleChange, searchObj, compareScreen }) {
 
   return (
     <>
-      <Box width="40%" display={compareScreen ? "none" : ""}>
+      <Box>
         <h2
           style={{
             outline: "solid",
