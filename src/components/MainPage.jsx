@@ -48,7 +48,11 @@ function MainPage() {
       // setSearchText(e.target.value);
       setSearchResults(
         // filters list based on locName ONLY
-        fullList.filter((loc) => loc.locName.includes(`${e.target.value}`))
+        fullList.filter((loc) => {
+          let field = loc[`${e.target.id}`];
+          console.log(field);
+          return field.includes(`${e.target.value}`);
+        })
       );
     }
   }
@@ -57,7 +61,7 @@ function MainPage() {
 
   return (
     <>
-      <h3>Main page</h3>
+      <h3>Location Lookup</h3>
       <Button onClick={() => setCompareScreen(false)}>Input</Button>
       <Button onClick={() => setCompareScreen(true)}>Compare</Button>
       <Box display="flex" flexDirection="row" justifyContent="space-around">

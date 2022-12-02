@@ -3,6 +3,7 @@ import { Box, Grid } from "@mui/material";
 import ReactDiffViewer from "react-diff-viewer";
 import { useMemo } from "react";
 import tokenize from "./tokenize";
+import { LocationNamingMap } from "../util/constants";
 
 import "react-diff-view/style/index.css";
 
@@ -15,10 +16,8 @@ function CompareTable({ objCompare, dataToMerge, compareScreen }) {
 
   function nestedObjManipNONORIG(obj) {
     const flattened = {};
-
     Object.keys(obj).forEach((key) => {
       const value = obj[key];
-
       if (
         typeof value === "object" &&
         value !== null &&
@@ -29,27 +28,23 @@ function CompareTable({ objCompare, dataToMerge, compareScreen }) {
         flattened[key] = value;
       }
     });
-
     return flattened;
   }
-
-  console.log(objCompare);
-  // console.log(nestedObjManipNONORIG(objCompare));
 
   const [{ hunks }] = useState("");
 
   useMemo(() => tokenize(hunks), [hunks]);
 
   useEffect(() => {
-    setInputText(createText(dataToMerge));
-    setCompareText(createText(objCompare));
+    setInputText(createText(nestedObjManipNONORIG(dataToMerge)));
+    setCompareText(createText(nestedObjManipNONORIG(objCompare)));
   }, [dataToMerge, objCompare]);
 
   function createText(obj) {
     let text = ``;
     for (const att of totalCompFieldsArr) {
       text = text.concat(`
-  ${att}: ${obj[`${att}`] || ""}`);
+  ${LocationNamingMap[`${att}`]}: ${obj[`${att}`] || ""}`);
     }
     return text;
   }

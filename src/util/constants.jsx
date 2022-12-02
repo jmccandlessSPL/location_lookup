@@ -38,6 +38,31 @@ export const LocationNamingMap = {
   isDeleted: "Deleted",
 };
 
+export const AbbrLocationMapForDataGrid = {
+  id: "ID",
+  locName: "Name",
+  locNameLong: "Long Name",
+  locType: "Type",
+  locSubType: "Sub Type",
+  isActive: "Active",
+  businessStatus: "Business Status",
+  primaryOwner: "Primary Owner",
+  effectiveStartDate: "Effective Start Date",
+  effectiveEndDate: "Effective End Date",
+  addrState: "Address State",
+  addrCounty: "Address County",
+  beId: "Business Entity ID",
+  beRole: "Busniess Entity Role",
+  status: "Status",
+  parentLocId: "Parent Location ID",
+  updatedBy: "Updated By",
+  updatedOn: "Updated On",
+  createdBy: "Created By",
+  createdOn: "Created On",
+};
+
+export const LocationInfoFromTags = ["Location", "Station", "Station No."];
+
 /*
  * Cylinder Tag Inputs
  * Cylinder #
@@ -54,13 +79,13 @@ export const LocationNamingMap = {
  * Ambient Temperature
  * Sampled By
  * Company
- * Date/Time Off
+ * Date/Time Off (am/pm)
  * On (am/pm)
- * Sample Pressure? (Checkbox...?)
- * Sample Temperature?
- * H20 Count (Checkbox...?
- * H2S Count (Checkbox...?)
- * N2 Outage?
- * Rienmarks?
+ * Sample Pressure? (Checkbox PSIG, PSIA)
+ * Sample Temperature
+ * H20 Count
+ * H2S Count (Checkbox PPM, Grains, %)
+ * % Outage
+ * Remarks?
  *
  * */
