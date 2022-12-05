@@ -11,14 +11,14 @@ function LookupForm({ searchResults, handleChange, searchObj, compareScreen }) {
   return (
     <>
       <Box width="100%">
-        <h2
-          style={{
-            outline: "solid",
-            outlineColor: searchResults ? "green" : "red",
-          }}
+        <h3
+        // style={{
+        //   outline: "solid",
+        //   outlineColor: searchResults ? "green" : "red",
+        // }}
         >
-          form for search
-        </h2>
+          Location Input
+        </h3>
         <FormControl
           sx={{
             height: "400px",

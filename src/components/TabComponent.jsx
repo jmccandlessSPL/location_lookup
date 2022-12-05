@@ -11,24 +11,25 @@ function TabComponent(props) {
   };
   return (
     <>
-      <Box
-        width="40%"
-        sx={{
-          // flexGrow: 1,
-          bgcolor: "background.paper",
-          display: "flex",
-          height: 224,
-        }}
-      >
-        <Tabs
-          orientation="vertical"
-          value={value}
-          onChange={handleChange}
-          sx={{ borderRight: 1, borderColor: "divider" }}
+      <Box width="40%">
+        <Box
+          sx={{
+            // flexGrow: 1,
+            bgcolor: "background.paper",
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
-          <Tab label="Input" />
-          <Tab label="Compare" />
-        </Tabs>
+          <Tabs
+            // orientation="vertical"
+            value={value}
+            onChange={handleChange}
+            sx={{ borderBottom: 1, borderColor: "divider" }}
+          >
+            <Tab label="Input" />
+            <Tab label="Compare" />
+          </Tabs>
+        </Box>
         <TabPanel value={value} index={0}>
           {lookupForm}
         </TabPanel>
