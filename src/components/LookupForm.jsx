@@ -3,8 +3,15 @@ import { LocationNamingMap } from "../util/constants";
 import { Autocomplete, Box, FormControl, TextField } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 
-function LookupForm({ searchResults, handleChange, searchObj, compareScreen }) {
+function LookupForm({
+  searchResults,
+  handleChange,
+  searchObj,
+  compareScreen,
+  setSearchObj,
+}) {
   // this function allows the field to read the value as it updates from CompareTable
   function handleName(obj, k) {
     return obj[`${k}`];
@@ -12,8 +19,8 @@ function LookupForm({ searchResults, handleChange, searchObj, compareScreen }) {
 
   const [selectedDate, setSelectedDate] = useState();
 
-  function handleDateSelect(newDate) {
-    setSelectedDate(newDate);
+  function handleDateSelect(key, newDate) {
+    setSearchObj({ ...searchObj, [`${key}`]: newDate.toLocaleString() });
   }
 
   return (
@@ -42,8 +49,8 @@ function LookupForm({ searchResults, handleChange, searchObj, compareScreen }) {
                     // size="small"
                     label="Date desktop"
                     inputFormat="MM/DD/YYYY"
-                    value={selectedDate}
-                    onChange={handleDateSelect}
+                    value={searchObj[`${key}`] || new Date().toLocaleString()}
+                    onChange={(e) => handleDateSelect(key, e["$d"])}
                     renderInput={(params) => <TextField {...params} />}
                   />
                 </LocalizationProvider>
