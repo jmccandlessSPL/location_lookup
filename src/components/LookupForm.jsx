@@ -47,7 +47,7 @@ function LookupForm({
                 <LocalizationProvider key={i} dateAdapter={AdapterDayjs}>
                   <DesktopDatePicker
                     // size="small"
-                    label="Date desktop"
+                    label={val}
                     inputFormat="MM/DD/YYYY"
                     value={searchObj[`${key}`] || new Date().toLocaleString()}
                     onChange={(e) => handleDateSelect(key, e["$d"])}
