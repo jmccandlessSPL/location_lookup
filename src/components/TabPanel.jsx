@@ -10,8 +10,10 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
+      width="100%"
+      height="500px"
     >
-      {value === index && <Typography>{children}</Typography>}
+      {value === index && <Box height="100px">{children}</Box>}
     </Box>
   );
 }

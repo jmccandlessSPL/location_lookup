@@ -53,3 +53,6 @@ pre {
   /*flex-direction: row;*/
 }
 
+.compare-table-box {
+  overflow-y: scroll
+}

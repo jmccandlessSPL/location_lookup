@@ -24,7 +24,6 @@ function TabComponent(props) {
           orientation="vertical"
           value={value}
           onChange={handleChange}
-          aria-label="Vertical tabs example"
           sx={{ borderRight: 1, borderColor: "divider" }}
         >
           <Tab label="Input" />

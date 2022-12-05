@@ -10,7 +10,7 @@ function LookupForm({ searchResults, handleChange, searchObj, compareScreen }) {
 
   return (
     <>
-      <Box>
+      <Box width="100%">
         <h2
           style={{
             outline: "solid",
@@ -20,10 +20,13 @@ function LookupForm({ searchResults, handleChange, searchObj, compareScreen }) {
           form for search
         </h2>
         <FormControl
-          style={{
+          sx={{
+            height: "400px",
+            overflowY: "auto",
             display: "flex",
-            flexFlow: "row wrap",
-            justifyContent: "space-around",
+            flexWrap: "wrap",
+            flexDirection: "row",
+            justifyContent: "space-between",
           }}
         >
           {Object.entries(LocationNamingMap).map(([key, val], i) => (
