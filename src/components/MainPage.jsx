@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import { LocationNamingMap } from "../util/constants";
 import { Box } from "@mui/material";
 import TabComponent from "./TabComponent";
+import axios from "axios";
 
 function MainPage() {
   // fulllist so it only calls API once
@@ -13,6 +14,24 @@ function MainPage() {
 
   // searchText is what is typed by user
   const [searchText, setSearchText] = useState("");
+
+  const baseURL = "http://localhost:3785";
+
+  const retrieveLocations = async (url) => {
+    try {
+      setApiError(null);
+      const res = await axios.get([`${url}`]);
+      return res.data;
+    } catch (err) {
+      setApiError(err);
+    }
+  };
+
+  useEffect(() => {
+    retrieveLocations(baseURL).then((data) => {
+      console.log(data);
+    });
+  }, [baseURL]);
 
   // searchObj so the object fills in as the user types
   const [searchObj, setSearchObj] = useState(
@@ -89,15 +108,36 @@ function MainPage() {
         {/*  objCompare={selectedResult}*/}
         {/*  handleChange={handleChange}*/}
         {/*/>*/}
+  console.log(searchObj);
 
-        <SearchResults
-          searchResults={searchResults}
-          setSelectedResult={setSelectedResult}
-          setApiError={setApiError}
-          setFullList={setFullList}
-          setSearchResults={setSearchResults}
-        />
-      </Box>
+  ////// FileSystemAccessAPI ///////
+
+  return (
+    <>
+      <h3>Main page</h3>
+      <Button onClick={() => setCompareScreen(false)}>Input</Button>
+      <Button onClick={() => setCompareScreen(true)}>Compare</Button>
+      <LookupForm
+        compareScreen={compareScreen}
+        searchObj={searchObj}
+        searchResults={searchResults}
+        handleChange={handleChange}
+      />
+      <CompareTable
+        compareScreen={compareScreen}
+        filteredLocationListFull={searchResults}
+        dataToMerge={searchObj}
+        objCompare={selectedResult}
+        handleChange={handleChange}
+      />
+
+      <SearchResults
+        searchResults={searchResults}
+        setSelectedResult={setSelectedResult}
+        setApiError={setApiError}
+        setFullList={setFullList}
+        setSearchResults={setSearchResults}
+      />
     </>
   );
 }
