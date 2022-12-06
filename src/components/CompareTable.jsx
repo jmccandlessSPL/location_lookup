@@ -64,7 +64,7 @@ function CompareTable({ objCompare, dataToMerge }) {
           oldValue={inputText}
           newValue={compareText}
           splitView={true}
-          hideLineNumbers={true}
+          hideLineNumbers={false}
           showDiffOnly={false}
           codeFoldMessageRenderer={(number) => {
             return `Expand Rows (${number} rows have same data)`;
@@ -72,6 +72,15 @@ function CompareTable({ objCompare, dataToMerge }) {
           // extraLinesSurroundingDiff={5}
           onLineNumberClick={(lineId) => console.log("click")}
           styles={{
+            gutter: {
+              padding: "0",
+              maxWidth: "20px",
+              minWidth: "0px",
+            },
+            lineNumber: {
+              textAlign: "center",
+              width: "20px",
+            },
             contentText: {
               minWidth: "max-content",
               width: "100%",
