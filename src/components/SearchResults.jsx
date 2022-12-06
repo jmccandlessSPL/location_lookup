@@ -34,7 +34,7 @@ function SearchResults({
 
   useEffect(() => {
     retrieveLocations(baseURL).then((data) => {
-      data.forEach((el) => {
+      data?.forEach((el) => {
         el.createdOn = dateAdjust(el.createdOn);
         el.updatedOn = dateAdjust(el.updatedOn);
       });
@@ -53,7 +53,7 @@ function SearchResults({
         return obj;
       })
     );
-  }, [retrieveLocations, setFullList, setSearchResults]);
+  }, [setFullList, setSearchResults]);
 
   return (
     <>

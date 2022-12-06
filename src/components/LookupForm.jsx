@@ -39,8 +39,8 @@ function LookupForm({ handleChange, searchObj, setSearchObj }) {
           {Object.entries(LocationNamingMap).map(([key, val], i) => {
             if (key === "effectiveStartDate" || key === "effectiveEndDate") {
               return (
-                <Box className="field-input-box">
-                  <LocalizationProvider key={i} dateAdapter={AdapterDayjs}>
+                <Box key={i} className="field-input-box">
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DesktopDatePicker
                       label={val}
                       inputFormat="MM/DD/YYYY"
