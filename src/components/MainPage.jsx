@@ -4,7 +4,7 @@ import SearchResults from "./SearchResults";
 import CompareTable from "./CompareTable";
 import Button from "@mui/material/Button";
 import { LocationNamingMap } from "../util/constants";
-import { Box } from "@mui/material";
+import axios from "axios";
 
 function MainPage() {
   // fulllist so it only calls API once
@@ -12,6 +12,24 @@ function MainPage() {
 
   // searchText is what is typed by user
   const [searchText, setSearchText] = useState("");
+
+  const baseURL = "http://localhost:3785";
+
+  const retrieveLocations = async (url) => {
+    try {
+      setApiError(null);
+      const res = await axios.get([`${url}`]);
+      return res.data;
+    } catch (err) {
+      setApiError(err);
+    }
+  };
+
+  useEffect(() => {
+    retrieveLocations(baseURL).then((data) => {
+      console.log(data);
+    });
+  }, [baseURL]);
 
   // searchObj so the object fills in as the user types
   const [searchObj, setSearchObj] = useState(
@@ -53,6 +71,8 @@ function MainPage() {
     }
   }
 
+  console.log(searchObj);
+
   ////// FileSystemAccessAPI ///////
 
   return (
@@ -60,30 +80,27 @@ function MainPage() {
       <h3>Main page</h3>
       <Button onClick={() => setCompareScreen(false)}>Input</Button>
       <Button onClick={() => setCompareScreen(true)}>Compare</Button>
-      <Box display="flex" flexDirection="row" justifyContent="space-around">
-        <LookupForm
-          compareScreen={compareScreen}
-          searchObj={searchObj}
-          searchResults={searchResults}
-          setSearchObj={setSearchObj}
-          handleChange={handleChange}
-        />
-        <CompareTable
-          compareScreen={compareScreen}
-          filteredLocationListFull={searchResults}
-          dataToMerge={searchObj}
-          objCompare={selectedResult}
-          handleChange={handleChange}
-        />
+      <LookupForm
+        compareScreen={compareScreen}
+        searchObj={searchObj}
+        searchResults={searchResults}
+        handleChange={handleChange}
+      />
+      <CompareTable
+        compareScreen={compareScreen}
+        filteredLocationListFull={searchResults}
+        dataToMerge={searchObj}
+        objCompare={selectedResult}
+        handleChange={handleChange}
+      />
 
-        <SearchResults
-          searchResults={searchResults}
-          setSelectedResult={setSelectedResult}
-          setApiError={setApiError}
-          setFullList={setFullList}
-          setSearchResults={setSearchResults}
-        />
-      </Box>
+      <SearchResults
+        searchResults={searchResults}
+        setSelectedResult={setSelectedResult}
+        setApiError={setApiError}
+        setFullList={setFullList}
+        setSearchResults={setSearchResults}
+      />
     </>
   );
 }
