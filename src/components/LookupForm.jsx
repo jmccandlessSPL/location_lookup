@@ -1,31 +1,47 @@
 import React, { useEffect, useState } from "react";
+import { LocationNamingMap } from "../util/constants";
+import { Autocomplete, Box, FormControl, TextField } from "@mui/material";
 
-function LookupForm() {
-  const [location, setLocation] = useState("");
-  const baseURL = "https://api.mdm.sandbox.suresuiteapps.com/v1/locations/";
-  useEffect(() => {}, []);
-
-  function handleChange(e) {
-    e.preventDefault();
-    setLocation(e.target.value);
+function LookupForm({ searchResults, handleChange, searchObj, compareScreen }) {
+  // this function allows the field to read the value as it updates from CompareTable
+  function handleName(obj, k) {
+    return obj[`${k}`];
   }
 
   return (
     <>
-      <div>
-        form for search
-        <form>
-          <label>
-            Search for...
-            <input
-              name="location"
-              type="text"
-              value={location}
+      <Box width="40%" display={compareScreen ? "none" : ""}>
+        <h2
+          style={{
+            outline: "solid",
+            outlineColor: searchResults ? "green" : "red",
+          }}
+        >
+          form for search
+        </h2>
+        <FormControl
+          style={{
+            display: "flex",
+            flexFlow: "row wrap",
+            justifyContent: "space-around",
+          }}
+        >
+          {Object.entries(LocationNamingMap).map(([key, val], i) => (
+            <TextField
+              sx={{ margin: "5px 10px" }}
+              key={i}
+              size="small"
+              // margin="dense"
+              variant="outlined"
               onChange={handleChange}
+              label={val}
+              id={key}
+              name={key}
+              value={handleName(searchObj, key)}
             />
-          </label>
-        </form>
-      </div>
+          ))}
+        </FormControl>
+      </Box>
     </>
   );
 }
