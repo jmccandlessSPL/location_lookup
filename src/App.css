@@ -37,3 +37,27 @@
     transform: rotate(360deg);
   }
 }
+
+tr {
+  text-align: left;
+
+}
+
+tr:nth-child(even) > td {
+  filter: brightness(.90);
+}
+
+pre {
+  font-family: inherit;
+  /*display: flex;*/
+  /*flex-direction: row;*/
+}
+
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  width: 222.4px;
+  margin: 5px 10px;
+}
+
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+  margin: 5px 0px;
+}
