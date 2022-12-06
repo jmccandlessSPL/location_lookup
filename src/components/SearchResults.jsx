@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { LocationNamingMap } from "../util/constants";
+import {
+  AbbrLocationMapForDataGrid,
+  LocationNamingMap,
+} from "../util/constants";
 import axios from "axios";
 
 function SearchResults({
@@ -25,8 +28,16 @@ function SearchResults({
     }
   };
 
+  function dateAdjust(isoDate) {
+    return new Date(isoDate).toLocaleString();
+  }
+
   useEffect(() => {
     retrieveLocations(baseURL).then((data) => {
+      data.map((el) => {
+        el.createdOn = dateAdjust(el.createdOn);
+        el.updatedOn = dateAdjust(el.updatedOn);
+      });
       setFullList(data);
       setSearchResults(data);
     });
@@ -34,13 +45,15 @@ function SearchResults({
 
   useEffect(() => {
     setDataColumns(
-      Object.keys(LocationNamingMap).map((shortName) => {
-        const obj = {};
-        obj.field = shortName;
-        obj.headerName = LocationNamingMap[`${shortName}`];
-        obj.width = 160;
-        return obj;
-      })
+      Object.keys(AbbrLocationMapForDataGrid)
+        // .filter((el) => el !== "coordLonLat" && el !== "locationChars")
+        .map((shortName) => {
+          const obj = {};
+          obj.field = shortName;
+          obj.headerName = LocationNamingMap[`${shortName}`];
+          obj.width = 160;
+          return obj;
+        })
     );
   }, []);
 

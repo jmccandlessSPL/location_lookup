@@ -12,9 +12,6 @@ function MainPage() {
   // fulllist so it only calls API once
   const [fullList, setFullList] = useState(null);
 
-  // searchText is what is typed by user
-  const [searchText, setSearchText] = useState("");
-
   const baseURL = "http://localhost:3785";
 
   const retrieveLocations = async (url) => {
@@ -66,7 +63,12 @@ function MainPage() {
       // setSearchText(e.target.value);
       setSearchResults(
         // filters list based on locName ONLY
-        fullList.filter((loc) => loc.locName.includes(`${e.target.value}`))
+        // fullList.filter((loc) => loc.locName.includes(`${e.target.value}`))
+        fullList.filter((loc) => {
+          let field = loc[`${e.target.id}`];
+          console.log(field);
+          return field.includes(`${e.target.value}`);
+        })
       );
     }
   }
@@ -89,55 +91,22 @@ function MainPage() {
   );
 
   ////// FileSystemAccessAPI ///////
-
-  return (
-    <>
-      <h3>Main page</h3>
-      <Box display="flex" flexDirection="row" justifyContent="space-around">
-        <TabComponent comparingTable={comparingTable} lookupForm={lookupForm} />
-        {/*<LookupForm*/}
-        {/*  compareScreen={compareScreen}*/}
-        {/*  searchObj={searchObj}*/}
-        {/*  searchResults={searchResults}*/}
-        {/*  handleChange={handleChange}*/}
-        {/*/>*/}
-        {/*<CompareTable*/}
-        {/*  compareScreen={compareScreen}*/}
-        {/*  filteredLocationListFull={searchResults}*/}
-        {/*  dataToMerge={searchObj}*/}
-        {/*  objCompare={selectedResult}*/}
-        {/*  handleChange={handleChange}*/}
-        {/*/>*/}
   console.log(searchObj);
 
-  ////// FileSystemAccessAPI ///////
-
   return (
     <>
-      <h3>Main page</h3>
-      <Button onClick={() => setCompareScreen(false)}>Input</Button>
-      <Button onClick={() => setCompareScreen(true)}>Compare</Button>
-      <LookupForm
-        compareScreen={compareScreen}
-        searchObj={searchObj}
-        searchResults={searchResults}
-        handleChange={handleChange}
-      />
-      <CompareTable
-        compareScreen={compareScreen}
-        filteredLocationListFull={searchResults}
-        dataToMerge={searchObj}
-        objCompare={selectedResult}
-        handleChange={handleChange}
-      />
+      <h3>Location Lookup</h3>
+      <Box display="flex" flexDirection="row" justifyContent="space-around">
+        <TabComponent comparingTable={comparingTable} lookupForm={lookupForm} />
 
-      <SearchResults
-        searchResults={searchResults}
-        setSelectedResult={setSelectedResult}
-        setApiError={setApiError}
-        setFullList={setFullList}
-        setSearchResults={setSearchResults}
-      />
+        <SearchResults
+          searchResults={searchResults}
+          setSelectedResult={setSelectedResult}
+          setApiError={setApiError}
+          setFullList={setFullList}
+          setSearchResults={setSearchResults}
+        />
+      </Box>
     </>
   );
 }

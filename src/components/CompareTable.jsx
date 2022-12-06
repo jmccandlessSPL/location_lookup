@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import tokenize from "./tokenize";
 
 import "react-diff-view/style/index.css";
+import { LocationNamingMap } from "../util/constants";
 
 function CompareTable({ objCompare, dataToMerge, compareScreen }) {
   const [totalCompFieldsArr, setTotalCompFieldsArr] = useState([
@@ -13,20 +14,42 @@ function CompareTable({ objCompare, dataToMerge, compareScreen }) {
   const [inputText, setInputText] = useState("");
   const [compareText, setCompareText] = useState("");
 
+  function nestedObjManipNONORIG(obj) {
+    const flattened = {};
+
+    Object.keys(obj).forEach((key) => {
+      const value = obj[key];
+
+      if (
+        typeof value === "object" &&
+        value !== null &&
+        !Array.isArray(value)
+      ) {
+        Object.assign(flattened, nestedObjManipNONORIG(value));
+      } else {
+        flattened[key] = value;
+      }
+    });
+
+    return flattened;
+  }
+
   const [{ hunks }] = useState("");
 
   useMemo(() => tokenize(hunks), [hunks]);
 
   useEffect(() => {
-    setInputText(createText(dataToMerge));
-    setCompareText(createText(objCompare));
+    // setInputText(createText(dataToMerge));
+    // setCompareText(createText(objCompare));
+    setInputText(createText(nestedObjManipNONORIG(dataToMerge)));
+    setCompareText(createText(nestedObjManipNONORIG(objCompare)));
   }, [dataToMerge, objCompare]);
 
   function createText(obj) {
     let text = ``;
     for (const att of totalCompFieldsArr) {
       text = text.concat(`
-  ${att}: ${obj[`${att}`] || ""}`);
+  ${LocationNamingMap[`${att}`]}: ${obj[`${att}`] || ""}`);
     }
     return text;
   }
