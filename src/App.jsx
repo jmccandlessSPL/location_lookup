@@ -1,6 +1,4 @@
-import logo from "./logo.svg";
 import "./App.css";
-import LookupForm from "./components/LookupForm";
 import MainPage from "./components/MainPage";
 
 function App() {

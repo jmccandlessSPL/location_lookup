@@ -53,6 +53,10 @@ pre {
   /*flex-direction: row;*/
 }
 
+.compare-table-box {
+  overflow-y: scroll;
+}
+
 .field-input-box {
   width: 220px;
   margin: 5px 10px;

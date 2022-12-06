@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import {
   AbbrLocationMapForDataGrid,
@@ -34,58 +34,29 @@ function SearchResults({
 
   useEffect(() => {
     retrieveLocations(baseURL).then((data) => {
-      data.map((el) => {
+      data.forEach((el) => {
         el.createdOn = dateAdjust(el.createdOn);
         el.updatedOn = dateAdjust(el.updatedOn);
       });
       setFullList(data);
       setSearchResults(data);
     });
-  }, [baseURL]);
+  }, [setFullList, setSearchResults, baseURL]);
 
   useEffect(() => {
     setDataColumns(
-      Object.keys(AbbrLocationMapForDataGrid)
-        // .filter((el) => el !== "coordLonLat" && el !== "locationChars")
-        .map((shortName) => {
-          const obj = {};
-          obj.field = shortName;
-          obj.headerName = LocationNamingMap[`${shortName}`];
-          obj.width = 160;
-          return obj;
-        })
+      Object.keys(AbbrLocationMapForDataGrid).map((shortName) => {
+        const obj = {};
+        obj.field = shortName;
+        obj.headerName = LocationNamingMap[`${shortName}`];
+        obj.width = 160;
+        return obj;
+      })
     );
-  }, []);
-
-  // const columns = [
-  //   { field: "id", headerName: "ID", width: 90 },
-  //   {
-  //     field: "firstName",
-  //     headerName: "First name",
-  //     width: 150,
-  //     editable: true,
-  //   },
-  //   {
-  //     field: "fullName",
-  //     headerName: "Full name",
-  //     description: "This column has a value getter and is not sortable.",
-  //     sortable: false,
-  //     width: 160,
-  //     valueGetter: (params) =>
-  //       `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  //   },
-  // ];
+  }, [retrieveLocations, setFullList, setSearchResults]);
 
   return (
     <>
-      {/*<Grid*/}
-      {/*  container*/}
-      {/*  spacing={0}*/}
-      {/*  direction="column"*/}
-      {/*  alignItems="center"*/}
-      {/*  justify="center"*/}
-      {/*  style={{ minHeight: "100vh" }}*/}
-      {/*>*/}
       <Box height="600px" width="50%">
         <h2>Location List</h2>
         <DataGrid
@@ -99,7 +70,6 @@ function SearchResults({
           // disableSelectionOnClick
         />
       </Box>
-      {/*</Grid>*/}
     </>
   );
 }

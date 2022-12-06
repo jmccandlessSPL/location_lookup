@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import LookupForm from "./LookupForm";
 import SearchResults from "./SearchResults";
 import CompareTable from "./CompareTable";
-import Button from "@mui/material/Button";
 import { LocationNamingMap } from "../util/constants";
 import { Box } from "@mui/material";
 import TabComponent from "./TabComponent";
@@ -11,32 +10,6 @@ import axios from "axios";
 function MainPage() {
   // fulllist so it only calls API once
   const [fullList, setFullList] = useState(null);
-
-  const baseURL = "http://localhost:3785";
-
-  const retrieveLocations = async (url) => {
-    try {
-      setApiError(null);
-      const res = await axios.get([`${url}`]);
-      return res.data;
-    } catch (err) {
-      setApiError(err);
-    }
-  };
-
-  useEffect(() => {
-    retrieveLocations(baseURL).then((data) => {
-      console.log(data);
-    });
-  }, [baseURL]);
-
-  // searchObj so the object fills in as the user types
-  const [searchObj, setSearchObj] = useState(
-    Object.keys(LocationNamingMap).reduce(
-      (obj, key) => ({ ...obj, [key]: "" }),
-      {}
-    )
-  );
 
   // resulting list as the user types
   const [searchResults, setSearchResults] = useState();
@@ -47,14 +20,34 @@ function MainPage() {
   // gets information from the row selected from data grid
   const [selectedResult, setSelectedResult] = useState([]);
 
+  // location of the node backend
+  const baseURL = "http://localhost:3785";
+
+  // function to retireve data from the node backend
+  const retrieveLocations = async (url) => {
+    try {
+      setApiError(null);
+      const res = await axios.get([`${url}`]);
+      return res.data;
+    } catch (err) {
+      setApiError(err);
+    }
+  };
+
+  // calls the function to the node backend
   useEffect(() => {
-    /* const newObj = {};
-    Object.keys(LocationNamingMap).map((att) => {
-      console.log(att);
-      newObj[`${att}`] = "";
+    retrieveLocations(baseURL).then((data) => {
+      // console.log(data);
     });
-    setSearchObj(newObj);*/
-  }, []);
+  }, [baseURL]);
+
+  // searchObj so the object fills in as the user types
+  const [searchObj, setSearchObj] = useState(
+    Object.keys(LocationNamingMap).reduce(
+      (obj, key) => ({ ...obj, [key]: "" }),
+      {}
+    )
+  );
 
   function handleChange(e) {
     e.preventDefault();
@@ -76,22 +69,16 @@ function MainPage() {
   const lookupForm = (
     <LookupForm
       searchObj={searchObj}
-      searchResults={searchResults}
+      setSearchObj={setSearchObj}
       handleChange={handleChange}
     />
   );
 
   const comparingTable = (
-    <CompareTable
-      filteredLocationListFull={searchResults}
-      dataToMerge={searchObj}
-      objCompare={selectedResult}
-      handleChange={handleChange}
-    />
+    <CompareTable dataToMerge={searchObj} objCompare={selectedResult} />
   );
 
   ////// FileSystemAccessAPI ///////
-  console.log(searchObj);
 
   return (
     <>
