@@ -4,6 +4,8 @@ import SearchResults from "./SearchResults";
 import CompareTable from "./CompareTable";
 import Button from "@mui/material/Button";
 import { LocationNamingMap } from "../util/constants";
+import { Box } from "@mui/material";
+import TabComponent from "./TabComponent";
 import axios from "axios";
 
 function MainPage() {
@@ -48,8 +50,6 @@ function MainPage() {
   // gets information from the row selected from data grid
   const [selectedResult, setSelectedResult] = useState([]);
 
-  const [compareScreen, setCompareScreen] = useState(false);
-
   useEffect(() => {
     /* const newObj = {};
     Object.keys(LocationNamingMap).map((att) => {
@@ -71,6 +71,43 @@ function MainPage() {
     }
   }
 
+  const lookupForm = (
+    <LookupForm
+      searchObj={searchObj}
+      searchResults={searchResults}
+      handleChange={handleChange}
+    />
+  );
+
+  const comparingTable = (
+    <CompareTable
+      filteredLocationListFull={searchResults}
+      dataToMerge={searchObj}
+      objCompare={selectedResult}
+      handleChange={handleChange}
+    />
+  );
+
+  ////// FileSystemAccessAPI ///////
+
+  return (
+    <>
+      <h3>Main page</h3>
+      <Box display="flex" flexDirection="row" justifyContent="space-around">
+        <TabComponent comparingTable={comparingTable} lookupForm={lookupForm} />
+        {/*<LookupForm*/}
+        {/*  compareScreen={compareScreen}*/}
+        {/*  searchObj={searchObj}*/}
+        {/*  searchResults={searchResults}*/}
+        {/*  handleChange={handleChange}*/}
+        {/*/>*/}
+        {/*<CompareTable*/}
+        {/*  compareScreen={compareScreen}*/}
+        {/*  filteredLocationListFull={searchResults}*/}
+        {/*  dataToMerge={searchObj}*/}
+        {/*  objCompare={selectedResult}*/}
+        {/*  handleChange={handleChange}*/}
+        {/*/>*/}
   console.log(searchObj);
 
   ////// FileSystemAccessAPI ///////

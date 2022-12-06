@@ -74,7 +74,7 @@ function SearchResults({
       {/*  style={{ minHeight: "100vh" }}*/}
       {/*>*/}
       <Box height="600px" width="50%">
-        <h2>Data Grid</h2>
+        <h2>Location List</h2>
         <DataGrid
           onCellClick={(rowData) => setSelectedResult(rowData.row)}
           rows={searchResults || []}

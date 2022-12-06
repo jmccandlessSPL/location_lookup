@@ -25,20 +25,23 @@ function LookupForm({
 
   return (
     <>
-      <Box width="40%" display={compareScreen ? "none" : ""}>
-        <h2
-          style={{
-            outline: "solid",
-            outlineColor: searchResults ? "green" : "red",
-          }}
+      <Box width="100%">
+        <h3
+        // style={{
+        //   outline: "solid",
+        //   outlineColor: searchResults ? "green" : "red",
+        // }}
         >
-          form for search
-        </h2>
+          Location Input
+        </h3>
         <FormControl
-          style={{
+          sx={{
+            height: "400px",
+            overflowY: "auto",
             display: "flex",
-            flexFlow: "row wrap",
-            justifyContent: "space-around",
+            flexWrap: "wrap",
+            flexDirection: "row",
+            justifyContent: "space-between",
           }}
         >
           {Object.entries(LocationNamingMap).map(([key, val], i) => {
