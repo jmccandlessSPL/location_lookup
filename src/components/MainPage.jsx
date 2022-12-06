@@ -65,6 +65,7 @@ function MainPage() {
           compareScreen={compareScreen}
           searchObj={searchObj}
           searchResults={searchResults}
+          setSearchObj={setSearchObj}
           handleChange={handleChange}
         />
         <CompareTable
