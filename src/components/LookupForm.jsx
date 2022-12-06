@@ -41,37 +41,36 @@ function LookupForm({
             display: "flex",
             flexWrap: "wrap",
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "space-around",
           }}
         >
           {Object.entries(LocationNamingMap).map(([key, val], i) => {
             if (key === "effectiveStartDate" || key === "effectiveEndDate") {
               return (
-                <LocalizationProvider key={i} dateAdapter={AdapterDayjs}>
-                  <DesktopDatePicker
-                    // size="small"
-                    label={val}
-                    inputFormat="MM/DD/YYYY"
-                    value={searchObj[`${key}`] || new Date().toLocaleString()}
-                    onChange={(e) => handleDateSelect(key, e["$d"])}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </LocalizationProvider>
+                <Box className="field-input-box">
+                  <LocalizationProvider key={i} dateAdapter={AdapterDayjs}>
+                    <DesktopDatePicker
+                      label={val}
+                      inputFormat="MM/DD/YYYY"
+                      value={searchObj[`${key}`] || new Date().toLocaleString()}
+                      onChange={(e) => handleDateSelect(key, e["$d"])}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </LocalizationProvider>
+                </Box>
               );
             }
             return (
-              <TextField
-                sx={{ margin: "5px 10px" }}
-                key={i}
-                // size="small"
-                // margin="dense"
-                variant="outlined"
-                onChange={handleChange}
-                label={val}
-                id={key}
-                name={key}
-                value={handleName(searchObj, key)}
-              />
+              <Box key={i} className="field-input-box">
+                <TextField
+                  variant="outlined"
+                  onChange={handleChange}
+                  label={val}
+                  id={key}
+                  name={key}
+                  value={handleName(searchObj, key)}
+                />
+              </Box>
             );
           })}
         </FormControl>
