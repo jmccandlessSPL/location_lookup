@@ -6,6 +6,7 @@ import { LocationNamingMap } from "../util/constants";
 import { Box } from "@mui/material";
 import TabComponent from "./TabComponent";
 import axios from "axios";
+import SelectLocationTable from "./SelectLcoationTable";
 
 function MainPage() {
   // fulllist so it only calls API once
@@ -78,13 +79,19 @@ function MainPage() {
     <CompareTable dataToMerge={searchObj} objCompare={selectedResult} />
   );
 
+  const singleLocationTable = <SelectLocationTable />;
+
   ////// FileSystemAccessAPI ///////
 
   return (
     <>
       <h3>Location Lookup</h3>
       <Box display="flex" flexDirection="row" justifyContent="space-around">
-        <TabComponent comparingTable={comparingTable} lookupForm={lookupForm} />
+        <TabComponent
+          comparingTable={comparingTable}
+          lookupForm={lookupForm}
+          singleLocationTable={singleLocationTable}
+        />
 
         <SearchResults
           searchResults={searchResults}

@@ -3,7 +3,7 @@ import { Box, Tab, Tabs } from "@mui/material";
 import TabPanel from "./TabPanel";
 
 function TabComponent(props) {
-  const { comparingTable, lookupForm } = props;
+  const { comparingTable, lookupForm, singleLocationTable } = props;
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -28,6 +28,7 @@ function TabComponent(props) {
           >
             <Tab label="Input" />
             <Tab label="Compare" />
+            <Tab label="Selected" />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
@@ -35,6 +36,9 @@ function TabComponent(props) {
         </TabPanel>
         <TabPanel value={value} index={1}>
           {comparingTable}
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          {singleLocationTable}
         </TabPanel>
       </Box>
     </>
