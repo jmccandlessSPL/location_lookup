@@ -38,6 +38,7 @@ export const LocationNamingMap = {
   isDeleted: "Deleted",
 };
 
+// attritubes that need a date type input
 export const dateAttributes = [
   "updatedOn",
   "createdOn",
@@ -45,6 +46,7 @@ export const dateAttributes = [
   "effectiveEndDate",
 ];
 
+// location attributes for the grid. gets rid of nested obj and
 export const AbbrLocationMapForDataGrid = {
   id: "ID",
   locName: "Name",
