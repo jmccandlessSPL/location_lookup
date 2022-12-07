@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import LookupForm from "./LookupForm";
 import SearchResults from "./SearchResults";
 import CompareTable from "./CompareTable";
-import { LocationNamingMap } from "../util/constants";
+import { LocationNamingMapMinimized } from "../util/constants";
 import { Box } from "@mui/material";
 import TabComponent from "./TabComponent";
 import axios from "axios";
@@ -43,7 +43,7 @@ function MainPage() {
 
   // searchObj so the object fills in as the user types
   const [searchObj, setSearchObj] = useState(
-    Object.keys(LocationNamingMap).reduce(
+    Object.keys(LocationNamingMapMinimized).reduce(
       (obj, key) => ({ ...obj, [key]: "" }),
       {}
     )

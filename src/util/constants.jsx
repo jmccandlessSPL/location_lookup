@@ -38,6 +38,29 @@ export const LocationNamingMap = {
   isDeleted: "Deleted",
 };
 
+export const LocationNamingMapMinimized = {
+  id: "ID",
+  locName: "Name",
+  locNameLong: "Long Name",
+  locType: "Type",
+  locSubType: "Sub Type",
+  locDesc: "Description",
+  primaryOwner: "Primary Owner",
+  effectiveStartDate: "Effective Start Date",
+  effectiveEndDate: "Effective End Date",
+  addrState: "Address State",
+  addrCounty: "Address County",
+  lon: "Longitude",
+  lat: "Latitude",
+  internalProjSysName: "Internal Project System Name",
+  status: "Status",
+  parentLocId: "Parent Location ID",
+  updatedBy: "Updated By",
+  updatedOn: "Updated On",
+  createdBy: "Created By",
+  createdOn: "Created On",
+};
+
 export const AbbrLocationMapForDataGrid = {
   id: "ID",
   locName: "Name",
