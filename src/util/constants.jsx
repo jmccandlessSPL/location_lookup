@@ -38,6 +38,13 @@ export const LocationNamingMap = {
   isDeleted: "Deleted",
 };
 
+export const dateAttributes = [
+  "updatedOn",
+  "createdOn",
+  "effectiveStartDate",
+  "effectiveEndDate",
+];
+
 export const AbbrLocationMapForDataGrid = {
   id: "ID",
   locName: "Name",
