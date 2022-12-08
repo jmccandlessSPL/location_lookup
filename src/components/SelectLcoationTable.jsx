@@ -49,8 +49,6 @@ function SelectLocationTable({ objCompare, dataToMerge }) {
   //   ...new Set([...Object.keys(objCompare), ...Object.keys(dataToMerge)]),
   // ]);
 
-  console.log(dataToMerge);
-
   function nestedObjManipNONORIG(obj) {
     const flattened = {};
 
