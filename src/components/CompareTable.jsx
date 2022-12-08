@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import tokenize from "./tokenize";
 
 import "react-diff-view/style/index.css";
-import { LocationNamingMap } from "../util/constants";
+import { LocationNamingMapMinimized } from "../util/constants";
 
 function CompareTable({ objCompare, dataToMerge }) {
   const [totalCompFieldsArr, setTotalCompFieldsArr] = useState([
@@ -49,7 +49,7 @@ function CompareTable({ objCompare, dataToMerge }) {
     let text = ``;
     for (const att of totalCompFieldsArr) {
       text = text.concat(`
-  ${LocationNamingMap[`${att}`]}: ${obj[`${att}`] || ""}`);
+  ${LocationNamingMapMinimized[`${att}`]}: ${obj[`${att}`] || ""}`);
     }
     return text;
   }

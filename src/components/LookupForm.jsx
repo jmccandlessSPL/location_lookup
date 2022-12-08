@@ -1,5 +1,5 @@
 import React from "react";
-import { LocationNamingMap } from "../util/constants";
+import { LocationNamingMapMinimized } from "../util/constants";
 import { Box, FormControl, TextField } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -36,7 +36,7 @@ function LookupForm({ handleChange, searchObj, setSearchObj }) {
             justifyContent: "space-around",
           }}
         >
-          {Object.entries(LocationNamingMap).map(([key, val], i) => {
+          {Object.entries(LocationNamingMapMinimized).map(([key, val], i) => {
             if (key === "effectiveStartDate" || key === "effectiveEndDate") {
               return (
                 <Box key={i} className="field-input-box">
