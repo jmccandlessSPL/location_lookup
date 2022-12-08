@@ -69,8 +69,6 @@ function SelectLocationTable({ objCompare, dataToMerge }) {
     return flattened;
   }
 
-  console.log(nestedObjManipNONORIG(objCompare));
-
   useEffect(() => {}, []);
 
   return (
