@@ -79,7 +79,9 @@ function MainPage() {
     <CompareTable dataToMerge={searchObj} objCompare={selectedResult} />
   );
 
-  const singleLocationTable = <SelectLocationTable />;
+  const singleLocationTable = (
+    <SelectLocationTable dataToMerge={searchObj} objCompare={selectedResult} />
+  );
 
   ////// FileSystemAccessAPI ///////
 
