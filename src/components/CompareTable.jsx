@@ -9,8 +9,13 @@ import { LocationNamingMapMinimized } from "../util/constants";
 
 function CompareTable({ objCompare, dataToMerge }) {
   const [totalCompFieldsArr, setTotalCompFieldsArr] = useState([
-    ...new Set([...Object.keys(objCompare), ...Object.keys(dataToMerge)]),
+    ...new Set(
+      [...Object.keys(objCompare), ...Object.keys(dataToMerge)].filter(
+        (el) => el !== "lon"
+      )
+    ),
   ]);
+
   const [inputText, setInputText] = useState("");
   const [compareText, setCompareText] = useState("");
 
