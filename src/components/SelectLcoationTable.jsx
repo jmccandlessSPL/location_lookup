@@ -146,9 +146,11 @@ function SelectLocationTable({ objCompare, dataToMerge }) {
               <td className="title-block">Value</td>
             </tr>
             {Object.keys(LocationNamingMap)
-              // ?.filter(
-              //   (rowTitle) => rowTitle !== "id" && rowTitle !== "keyy"
-              // )
+              ?.filter(
+                (rowTitle) =>
+                  rowTitle !== "id" && rowTitle !== "keyy" && rowTitle !== "lon"
+              )
+              .sort()
               .map((rowTitle, i) => {
                 return (
                   <tr key={i}>
