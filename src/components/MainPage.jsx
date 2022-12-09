@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import LookupForm from "./LookupForm";
 import SearchResults from "./SearchResults";
 import CompareTable from "./CompareTable";
-import { LocationNamingMap } from "../util/constants";
+import { LocationNamingMapMinimized } from "../util/constants";
 import { Box } from "@mui/material";
 import TabComponent from "./TabComponent";
 import axios from "axios";
+import SelectLocationTable from "./SelectLcoationTable";
 
 function MainPage() {
   // fulllist so it only calls API once
@@ -43,7 +44,7 @@ function MainPage() {
 
   // searchObj so the object fills in as the user types
   const [searchObj, setSearchObj] = useState(
-    Object.keys(LocationNamingMap).reduce(
+    Object.keys(LocationNamingMapMinimized).reduce(
       (obj, key) => ({ ...obj, [key]: "" }),
       {}
     )
@@ -59,7 +60,6 @@ function MainPage() {
         // fullList.filter((loc) => loc.locName.includes(`${e.target.value}`))
         fullList.filter((loc) => {
           let field = loc[`${e.target.id}`];
-          console.log(field);
           return field.includes(`${e.target.value}`);
         })
       );
@@ -78,21 +78,38 @@ function MainPage() {
     <CompareTable dataToMerge={searchObj} objCompare={selectedResult} />
   );
 
+  const singleLocationTable = (
+    <SelectLocationTable dataToMerge={searchObj} objCompare={selectedResult} />
+  );
+
   ////// FileSystemAccessAPI ///////
 
   return (
     <>
       <h3>Location Lookup</h3>
-      <Box display="flex" flexDirection="row" justifyContent="space-around">
-        <TabComponent comparingTable={comparingTable} lookupForm={lookupForm} />
+      <Box display="flex" flexDirection="column">
+        <Box>
+          <LookupForm
+            searchObj={searchObj}
+            setSearchObj={setSearchObj}
+            handleChange={handleChange}
+          />
+        </Box>
+        <Box display="flex" flexDirection="row" justifyContent="space-around">
+          <TabComponent
+            comparingTable={comparingTable}
+            // lookupForm={lookupForm}
+            singleLocationTable={singleLocationTable}
+          />
 
-        <SearchResults
-          searchResults={searchResults}
-          setSelectedResult={setSelectedResult}
-          setApiError={setApiError}
-          setFullList={setFullList}
-          setSearchResults={setSearchResults}
-        />
+          <SearchResults
+            searchResults={searchResults}
+            setSelectedResult={setSelectedResult}
+            setApiError={setApiError}
+            setFullList={setFullList}
+            setSearchResults={setSearchResults}
+          />
+        </Box>
       </Box>
     </>
   );
