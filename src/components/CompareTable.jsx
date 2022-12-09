@@ -21,10 +21,8 @@ function CompareTable({ objCompare, dataToMerge }) {
 
   function nestedObjManipNONORIG(obj) {
     const flattened = {};
-
     Object.keys(obj).forEach((key) => {
       const value = obj[key];
-
       if (
         typeof value === "object" &&
         value !== null &&
@@ -35,7 +33,6 @@ function CompareTable({ objCompare, dataToMerge }) {
         flattened[key] = value;
       }
     });
-
     return flattened;
   }
 
@@ -53,8 +50,10 @@ function CompareTable({ objCompare, dataToMerge }) {
   function createText(obj) {
     let text = ``;
     for (const att of totalCompFieldsArr) {
-      text = text.concat(`
+      if (LocationNamingMapMinimized[`${att}`]) {
+        text = text.concat(`
   ${LocationNamingMapMinimized[`${att}`]}: ${obj[`${att}`] || ""}`);
+      }
     }
     return text;
   }
