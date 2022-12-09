@@ -82,11 +82,6 @@ function SelectLocationTable({ objCompare, dataToMerge }) {
             height: "inherit",
           }}
         >
-          <CardHeader
-            title="Compare and Merge"
-            titleTypographyProps={{ fontSize: "2rem", align: "center" }}
-          />
-
           <TableContainer style={{ height: "inherit", display: "flex" }}>
             <Table stickyHeader style={{ height: "inherit" }}>
               <TableHead>
@@ -97,7 +92,7 @@ function SelectLocationTable({ objCompare, dataToMerge }) {
                   <MergeTableCell
                     style={{ backgroundColor: "#add2ed", fontWeight: "400px" }}
                   >
-                    Desired Merge Data
+                    Selected Data
                   </MergeTableCell>
                   {/*{objCompare?.map((el, i) => (*/}
                   {/*  <MergeTableCell*/}

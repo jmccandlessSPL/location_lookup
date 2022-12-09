@@ -26,18 +26,18 @@ function TabComponent(props) {
             onChange={handleChange}
             sx={{ borderBottom: 1, borderColor: "divider" }}
           >
-            <Tab label="Compare" />
             <Tab label="Selected" />
+            <Tab label="Compare" />
           </Tabs>
         </Box>
         {/*<TabPanel value={value} index={0}>*/}
         {/*  {lookupForm}*/}
         {/*</TabPanel>*/}
         <TabPanel value={value} index={0}>
-          {comparingTable}
+          {singleLocationTable}
         </TabPanel>
         <TabPanel value={value} index={1}>
-          {singleLocationTable}
+          {comparingTable}
         </TabPanel>
       </Box>
     </>
