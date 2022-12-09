@@ -38,6 +38,15 @@
   }
 }
 
+table {
+  display: table;
+  border-collapse: separate;
+  box-sizing: border-box;
+  text-indent: initial;
+  border-spacing: unset;
+  border-color: grey;
+}
+
 tr {
   text-align: left;
 
@@ -60,4 +69,21 @@ pre {
 .field-input-box {
   width: 220px;
   margin: 5px 10px;
+}
+
+.title-block {
+  background: #fafbfc;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  width: 150px;
+}
+
+.att-name {
+  background-color: white;
+}
+
+.pre-style {
+  line-height: 25px;
+  padding:0px 10px
 }

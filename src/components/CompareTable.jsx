@@ -81,12 +81,16 @@ function CompareTable({ objCompare, dataToMerge }) {
           // extraLinesSurroundingDiff={5}
           onLineNumberClick={(lineId) => console.log("click")}
           styles={{
+            wordDiff: {
+              padding: 0,
+            },
             contentText: {
               minWidth: "max-content",
               width: "100%",
             },
             content: {
-              // td
+              //td
+              // backgroundColor: "white",
             },
             diffContainer: {
               // table
