@@ -20,6 +20,7 @@ export const LocationNamingMap = {
   addrState: "Address State",
   addrCounty: "Address County",
   coordLonLat: "Coordinates",
+  lng: "Longitude",
   lon: "Longitude",
   lat: "Latitude",
   name: "Name",
@@ -37,6 +38,17 @@ export const LocationNamingMap = {
   createdOn: "Created On",
   isDeleted: "Deleted",
 };
+
+
+// attritubes that need a date type input
+export const dateAttributes = [
+  "updatedOn",
+  "createdOn",
+  "effectiveStartDate",
+  "effectiveEndDate",
+];
+
+// location attributes for the grid. gets rid of nested obj and
 
 export const LocationNamingMapMinimized = {
   id: "ID",
