@@ -39,6 +39,17 @@ export const LocationNamingMap = {
   isDeleted: "Deleted",
 };
 
+
+// attritubes that need a date type input
+export const dateAttributes = [
+  "updatedOn",
+  "createdOn",
+  "effectiveStartDate",
+  "effectiveEndDate",
+];
+
+// location attributes for the grid. gets rid of nested obj and
+
 export const LocationNamingMapMinimized = {
   id: "ID",
   locName: "Name",
