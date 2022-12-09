@@ -38,6 +38,15 @@
   }
 }
 
+table {
+  display: table;
+  border-collapse: separate;
+  box-sizing: border-box;
+  text-indent: initial;
+  border-spacing: unset;
+  border-color: grey;
+}
+
 tr {
   text-align: left;
 
@@ -74,6 +83,7 @@ pre {
   background-color: white;
 }
 
-.select-local-table > td {
-  background-color: pink;
+.pre-style {
+  line-height: 25px;
+  padding:0px 10px
 }
