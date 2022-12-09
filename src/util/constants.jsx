@@ -39,7 +39,6 @@ export const LocationNamingMap = {
   isDeleted: "Deleted",
 };
 
-
 // attritubes that need a date type input
 export const dateAttributes = [
   "updatedOn",
@@ -64,6 +63,7 @@ export const LocationNamingMapMinimized = {
   addrCounty: "Address County",
   lon: "Longitude",
   lat: "Latitude",
+  lng: "Longitude",
   internalProjSysName: "Internal Project System Name",
   status: "Status",
   parentLocId: "Parent Location ID",

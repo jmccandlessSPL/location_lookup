@@ -184,7 +184,6 @@ function SelectLocationTable({ objCompare, dataToMerge }) {
                     {/*    >*/}
                     {/*      <KeyboardArrowLeftSharpIcon align="right" />*/}
                     {/*    </MergeTableButton>*/}
-
                     {/*    {handleRowData(rowTitle, objCompare.at(0))}*/}
                     {/*  </div>*/}
                     {/*</MergeTableCell>*/}

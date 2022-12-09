@@ -9,22 +9,23 @@ import { LocationNamingMapMinimized } from "../util/constants";
 
 function CompareTable({ objCompare, dataToMerge }) {
   const [totalCompFieldsArr, setTotalCompFieldsArr] = useState([
-    ...new Set(
-      [...Object.keys(objCompare), ...Object.keys(dataToMerge)].filter(
-        (el) => el !== "lon"
-      )
-    ),
+    ...new Set([
+      ...Object.keys(objCompare),
+      ...Object.keys(dataToMerge),
+      "lng",
+    ]),
   ]);
+
+  console.log(totalCompFieldsArr);
+  console.log(LocationNamingMapMinimized);
 
   const [inputText, setInputText] = useState("");
   const [compareText, setCompareText] = useState("");
 
   function nestedObjManipNONORIG(obj) {
     const flattened = {};
-
     Object.keys(obj).forEach((key) => {
       const value = obj[key];
-
       if (
         typeof value === "object" &&
         value !== null &&
@@ -35,7 +36,7 @@ function CompareTable({ objCompare, dataToMerge }) {
         flattened[key] = value;
       }
     });
-
+    console.log(flattened);
     return flattened;
   }
 
@@ -52,9 +53,12 @@ function CompareTable({ objCompare, dataToMerge }) {
 
   function createText(obj) {
     let text = ``;
-    for (const att of totalCompFieldsArr) {
-      text = text.concat(`
+    for (const att of totalCompFieldsArr.sort()) {
+      console.log(LocationNamingMapMinimized[`${att}`]);
+      if (LocationNamingMapMinimized[`${att}`]) {
+        text = text.concat(`
   ${LocationNamingMapMinimized[`${att}`]}: ${obj[`${att}`] || ""}`);
+      }
     }
     return text;
   }
