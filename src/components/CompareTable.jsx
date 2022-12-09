@@ -16,9 +16,6 @@ function CompareTable({ objCompare, dataToMerge }) {
     ]),
   ]);
 
-  console.log(totalCompFieldsArr);
-  console.log(LocationNamingMapMinimized);
-
   const [inputText, setInputText] = useState("");
   const [compareText, setCompareText] = useState("");
 
@@ -36,7 +33,6 @@ function CompareTable({ objCompare, dataToMerge }) {
         flattened[key] = value;
       }
     });
-    console.log(flattened);
     return flattened;
   }
 
@@ -54,7 +50,6 @@ function CompareTable({ objCompare, dataToMerge }) {
   function createText(obj) {
     let text = ``;
     for (const att of totalCompFieldsArr.sort()) {
-      console.log(LocationNamingMapMinimized[`${att}`]);
       if (LocationNamingMapMinimized[`${att}`]) {
         text = text.concat(`
   ${LocationNamingMapMinimized[`${att}`]}: ${obj[`${att}`] || ""}`);
