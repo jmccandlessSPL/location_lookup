@@ -84,70 +84,74 @@ function SelectLocationTable({ objCompare, dataToMerge }) {
           }}
         >
           <TableContainer style={{ height: "inherit", display: "flex" }}>
-            <Table stickyHeader style={{ height: "inherit" }}>
-              <TableHead>
-                <TableRow>
-                  <MergeTableCell style={{ width: "250px" }}>
-                    Attribute
-                  </MergeTableCell>
-                  <MergeTableCell style={{ fontWeight: "400px" }}>
-                    Selected Data
-                  </MergeTableCell>
-                  {/*{objCompare?.map((el, i) => (*/}
-                  {/*  <MergeTableCell*/}
-                  {/*    key={i}*/}
-                  {/*    className={`${handleTitleColor(i)}`}*/}
-                  {/*  >*/}
-                  {/*    <div className={`div-inside`}>*/}
-                  {/*      {i === 0 && (*/}
-                  {/*        <MergeTableButton className={`single-butt`}>*/}
-                  {/*          <KeyboardDoubleArrowLeftSharpIcon*/}
-                  {/*            onClick={() => {*/}
-                  {/*              setMergeIndex(0);*/}
-                  {/*              setDataToMerge(objCompare[0]);*/}
-                  {/*              setObjToDelete({*/}
-                  {/*                ...objCompare[1],*/}
-                  {/*                isDeleted: true,*/}
-                  {/*              });*/}
-                  {/*            }}*/}
-                  {/*          />*/}
-                  {/*        </MergeTableButton>*/}
-                  {/*      )}*/}
-                  {/*      {i === 1 && (*/}
-                  {/*        <MergeTableButton className={`single-butt`}>*/}
-                  {/*          <KeyboardDoubleArrowRightSharpIcon*/}
-                  {/*            onClick={() => {*/}
-                  {/*              setMergeIndex(1);*/}
-                  {/*              setDataToMerge(objCompare[1]);*/}
-                  {/*              // setObjToDelete(objCompare[0]);*/}
-                  {/*              setObjToDelete({*/}
-                  {/*                ...objCompare[0],*/}
-                  {/*                isDeleted: true,*/}
-                  {/*              });*/}
-                  {/*            }}*/}
-                  {/*          />*/}
-                  {/*        </MergeTableButton>*/}
-                  {/*      )}*/}
-                  {/*      Location {i + 1}*/}
-                  {/*      {whichIcon(i)}*/}
-                  {/*    </div>*/}
-                  {/*  </MergeTableCell>*/}
-                  {/*))}*/}
-                </TableRow>
-              </TableHead>
-              <TableBody>
+            <table style={{ height: "inherit" }}>
+              {/*<TableHead>*/}
+              {/*  <TableRow>*/}
+              {/*    <MergeTableCell style={{ width: "250px" }}>*/}
+              {/*      Attribute*/}
+              {/*    </MergeTableCell>*/}
+              {/*    <MergeTableCell style={{ fontWeight: "400px" }}>*/}
+              {/*      Selected Data*/}
+              {/*    </MergeTableCell>*/}
+              {/*{objCompare?.map((el, i) => (*/}
+              {/*  <MergeTableCell*/}
+              {/*    key={i}*/}
+              {/*    className={`${handleTitleColor(i)}`}*/}
+              {/*  >*/}
+              {/*    <div className={`div-inside`}>*/}
+              {/*      {i === 0 && (*/}
+              {/*        <MergeTableButton className={`single-butt`}>*/}
+              {/*          <KeyboardDoubleArrowLeftSharpIcon*/}
+              {/*            onClick={() => {*/}
+              {/*              setMergeIndex(0);*/}
+              {/*              setDataToMerge(objCompare[0]);*/}
+              {/*              setObjToDelete({*/}
+              {/*                ...objCompare[1],*/}
+              {/*                isDeleted: true,*/}
+              {/*              });*/}
+              {/*            }}*/}
+              {/*          />*/}
+              {/*        </MergeTableButton>*/}
+              {/*      )}*/}
+              {/*      {i === 1 && (*/}
+              {/*        <MergeTableButton className={`single-butt`}>*/}
+              {/*          <KeyboardDoubleArrowRightSharpIcon*/}
+              {/*            onClick={() => {*/}
+              {/*              setMergeIndex(1);*/}
+              {/*              setDataToMerge(objCompare[1]);*/}
+              {/*              // setObjToDelete(objCompare[0]);*/}
+              {/*              setObjToDelete({*/}
+              {/*                ...objCompare[0],*/}
+              {/*                isDeleted: true,*/}
+              {/*              });*/}
+              {/*            }}*/}
+              {/*          />*/}
+              {/*        </MergeTableButton>*/}
+              {/*      )}*/}
+              {/*      Location {i + 1}*/}
+              {/*      {whichIcon(i)}*/}
+              {/*    </div>*/}
+              {/*  </MergeTableCell>*/}
+              {/*))}*/}
+              {/*  </TableRow>*/}
+              {/*</TableHead>*/}
+              <tbody className="select-local-table">
+                <tr>
+                  <td className="title-block">Attribute</td>
+                  <td className="title-block">Value</td>
+                </tr>
                 {Object.keys(LocationNamingMap)
                   // ?.filter(
                   //   (rowTitle) => rowTitle !== "id" && rowTitle !== "keyy"
                   // )
                   .map((rowTitle, i) => {
                     return (
-                      <TableRow key={i}>
-                        <MergeTableCell className="att-name" align="left">
+                      <tr key={i}>
+                        <td className="att-name" align="left">
                           <Box>{LocationNamingMap[`${rowTitle}`]}</Box>
-                        </MergeTableCell>
-                        <MergeTableCell
-                          // className="att-name"
+                        </td>
+                        <td
+                          className="att-name"
                           // style={{ backgroundColor: "none" }}
                           align="left"
                         >
@@ -155,7 +159,7 @@ function SelectLocationTable({ objCompare, dataToMerge }) {
                             {nestedObjManipNONORIG(objCompare)[`${rowTitle}`]}
                             {/*{dataToMerge && dataToMerge[`${rowTitle}`]}*/}
                           </Box>
-                        </MergeTableCell>
+                        </td>
                         {/*<MergeTableCell*/}
                         {/*  className={` ${handleCompareToMerge(rowTitle, 0)} `}*/}
                         {/*  align="left"*/}
@@ -196,11 +200,11 @@ function SelectLocationTable({ objCompare, dataToMerge }) {
                         {/*    {handleRowData(rowTitle, objCompare.at(1))}*/}
                         {/*  </div>*/}
                         {/*</MergeTableCell>*/}
-                      </TableRow>
+                      </tr>
                     );
                   })}
-              </TableBody>
-            </Table>
+              </tbody>
+            </table>
           </TableContainer>
         </Card>
       </Box>

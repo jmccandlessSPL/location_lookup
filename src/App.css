@@ -61,3 +61,19 @@ pre {
   width: 220px;
   margin: 5px 10px;
 }
+
+.title-block {
+  background: #fafbfc;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  width: 150px;
+}
+
+.att-name {
+  background-color: white;
+}
+
+.select-local-table > td {
+  background-color: pink;
+}
