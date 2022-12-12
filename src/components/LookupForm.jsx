@@ -28,12 +28,14 @@ function LookupForm({ handleChange, searchObj, setSearchObj }) {
         </h3>
         <FormControl
           sx={{
-            height: "400px",
+            height: "max-content",
             overflowY: "auto",
-            display: "flex",
-            flexWrap: "wrap",
-            flexDirection: "row",
-            justifyContent: "space-around",
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr [col-start])",
+            // display: "flex",
+            // flexWrap: "wrap",
+            // flexDirection: "row",
+            // justifyContent: "space-around",
           }}
         >
           {Object.entries(LocationNamingMapMinimized).map(([key, val], i) => {
@@ -55,6 +57,7 @@ function LookupForm({ handleChange, searchObj, setSearchObj }) {
             return (
               <Box key={i} className="field-input-box">
                 <TextField
+                  sx={{ width: "100%" }}
                   variant="outlined"
                   onChange={handleChange}
                   label={val}

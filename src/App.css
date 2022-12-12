@@ -62,13 +62,19 @@ pre {
   /*flex-direction: row;*/
 }
 
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  width: 100%;
+}
+
 .compare-table-box {
   overflow-y: scroll;
 }
 
 .field-input-box {
-  width: 220px;
+  justify-self: stretch;
+  /*width: 300px;*/
   margin: 5px 10px;
+  height: max-content;
 }
 
 .title-block {
