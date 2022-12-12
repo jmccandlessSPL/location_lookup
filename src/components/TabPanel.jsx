@@ -13,7 +13,7 @@ function TabPanel(props) {
       width="100%"
       height="500px"
     >
-      {value === index && <Box height="100px">{children}</Box>}
+      {value === index && <Box>{children}</Box>}
     </Box>
   );
 }
