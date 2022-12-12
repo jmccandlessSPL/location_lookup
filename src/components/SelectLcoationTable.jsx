@@ -44,6 +44,8 @@ function SelectLocationTable({ objCompare }) {
 
   function handleSaveButton(e) {
     setCanEdit(false);
+    console.log(editableObj);
+    //need to put the obj back into the codebase formatting
   }
 
   function handleChange(e) {
