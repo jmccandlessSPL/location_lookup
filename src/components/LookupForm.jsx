@@ -31,7 +31,7 @@ function LookupForm({ handleChange, searchObj, setSearchObj }) {
             height: "max-content",
             overflowY: "auto",
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr [col-start])",
+            gridTemplateColumns: "repeat(4, 1fr [col-start])",
             // display: "flex",
             // flexWrap: "wrap",
             // flexDirection: "row",
@@ -57,7 +57,7 @@ function LookupForm({ handleChange, searchObj, setSearchObj }) {
             return (
               <Box key={i} className="field-input-box">
                 <TextField
-                  sx={{ width: "100%" }}
+                  size="small"
                   variant="outlined"
                   onChange={handleChange}
                   label={val}

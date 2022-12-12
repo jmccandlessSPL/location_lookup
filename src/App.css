@@ -66,13 +66,25 @@ pre {
   width: 100%;
 }
 
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+  height: 40px;
+}
+
+/*.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {*/
+/*  padding:0;*/
+/*}*/
+
+.MuiInputBase-input .MuiOutlinedInput-input {
+  padding: 0
+
+}
+
 .compare-table-box {
   overflow-y: scroll;
 }
 
 .field-input-box {
   justify-self: stretch;
-  /*width: 300px;*/
   margin: 5px 10px;
   height: max-content;
 }
@@ -91,5 +103,17 @@ pre {
 
 .pre-style {
   line-height: 25px;
-  padding:0px 10px
+  padding:0 10px
 }
+
+/*.MuiInputBase-input {*/
+/* */
+/*}*/
+
+/*.MuiInputBase-root {*/
+/*  height: 2rem;*/
+/*}*/
+
+/*.MuiFormLabel-root {*/
+/*  transform: translate(2px, 6px) scale(1);*/
+/*}*/
