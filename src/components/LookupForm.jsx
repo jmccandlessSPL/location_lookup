@@ -36,11 +36,8 @@ function LookupForm({ handleChange, searchObj, setSearchObj }) {
             justifyContent: "space-around",
           }}
         >
-
           {Object.entries(LocationNamingMapMinimized).map(([key, val], i) => {
             if (dateAttributes.includes(key)) {
-
-
               return (
                 <Box key={i} className="field-input-box">
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
