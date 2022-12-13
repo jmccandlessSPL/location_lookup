@@ -5,6 +5,7 @@ import "react-diff-view/style/index.css";
 import { LocationNamingMap } from "../util/constants";
 
 const EditTableTextArea = styled(TextField)(({ theme }) => ({
+  width: "100%",
   "& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
     padding: "0 5px",
   },
