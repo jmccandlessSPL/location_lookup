@@ -67,8 +67,8 @@ function SelectLocationTable({ objCompare }) {
           <button onClick={handleEditButton}>edit</button>
         </Box>
       </Box>
-      <Box className="compare-table-box" height="400px">
-        <table style={{ height: "inherit", width: "100%" }}>
+      <Box id="single-location-info" overflow="auto">
+        <table style={{ width: "100%" }}>
           <tbody className="select-local-table">
             <tr>
               <td

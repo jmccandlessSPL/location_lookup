@@ -17,59 +17,56 @@ function LookupForm({ handleChange, searchObj, setSearchObj }) {
 
   return (
     <>
-      <Box width="100%">
-        <h3
-        // style={{
-        //   outline: "solid",
-        //   outlineColor: searchResults ? "green" : "red",
-        // }}
-        >
-          Location Input
-        </h3>
-        <FormControl
-          sx={{
-            height: "max-content",
-            overflowY: "auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr [col-start])",
-            // display: "flex",
-            // flexWrap: "wrap",
-            // flexDirection: "row",
-            // justifyContent: "space-around",
-          }}
-        >
-          {Object.entries(LocationNamingMapMinimized).map(([key, val], i) => {
-            if (dateAttributes.includes(key)) {
-              return (
-                <Box key={i} className="field-input-box">
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DesktopDatePicker
-                      label={val}
-                      inputFormat="MM/DD/YYYY"
-                      value={searchObj[`${key}`] || new Date().toLocaleString()}
-                      onChange={(e) => handleDateSelect(key, e["$d"])}
-                      renderInput={(params) => <TextField {...params} />}
-                    />
-                  </LocalizationProvider>
-                </Box>
-              );
-            }
+      <Box
+        className="tab-header"
+        display="grid"
+        gridTemplateColumns="1fr 3fr 1fr"
+      >
+        <h3 style={{ gridColumn: "2" }}>Location Input</h3>
+      </Box>
+      <FormControl
+        sx={{
+          height: "100%",
+          overflowY: "auto",
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr [col-start])",
+          // display: "flex",
+          // flexWrap: "wrap",
+          // flexDirection: "row",
+          // justifyContent: "space-around",
+        }}
+      >
+        {Object.entries(LocationNamingMapMinimized).map(([key, val], i) => {
+          if (dateAttributes.includes(key)) {
             return (
               <Box key={i} className="field-input-box">
-                <TextField
-                  size="small"
-                  variant="outlined"
-                  onChange={handleChange}
-                  label={val}
-                  id={key}
-                  name={key}
-                  value={handleName(searchObj, key)}
-                />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DesktopDatePicker
+                    label={val}
+                    inputFormat="MM/DD/YYYY"
+                    value={searchObj[`${key}`] || new Date().toLocaleString()}
+                    onChange={(e) => handleDateSelect(key, e["$d"])}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
               </Box>
             );
-          })}
-        </FormControl>
-      </Box>
+          }
+          return (
+            <Box key={i} className="field-input-box">
+              <TextField
+                size="small"
+                variant="outlined"
+                onChange={handleChange}
+                label={val}
+                id={key}
+                name={key}
+                value={handleName(searchObj, key)}
+              />
+            </Box>
+          );
+        })}
+      </FormControl>
     </>
   );
 }

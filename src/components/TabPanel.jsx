@@ -5,16 +5,27 @@ function TabPanel(props) {
   const { children, value, index } = props;
 
   return (
-    <Box
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      width="100%"
-      height="500px"
-    >
-      {value === index && <Box>{children}</Box>}
-    </Box>
+    <>
+      <Box
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        height="100%"
+        maxHeight="452px"
+      >
+        {value === index && (
+          <Box
+            id="single-tab"
+            display="flex"
+            flexDirection="column"
+            height="100%"
+          >
+            {children}
+          </Box>
+        )}
+      </Box>
+    </>
   );
 }
 

@@ -87,7 +87,7 @@ function MainPage() {
   return (
     <>
       <h3>Location Lookup</h3>
-      <Box display="flex" flexDirection="column">
+      <Box id="body-box" display="flex" flexDirection="column">
         {/*<Box>*/}
         {/*  <LookupForm*/}
         {/*    searchObj={searchObj}*/}
@@ -95,19 +95,41 @@ function MainPage() {
         {/*    handleChange={handleChange}*/}
         {/*  />*/}
         {/*</Box>*/}
-        <Box display="flex" flexDirection="row" justifyContent="space-around">
-          <TabComponent
-            comparingTable={comparingTable}
-            lookupForm={lookupForm}
-            singleLocationTable={singleLocationTable}
-          />
-          <SearchResults
-            searchResults={searchResults}
-            setSelectedResult={setSelectedResult}
-            setApiError={setApiError}
-            setFullList={setFullList}
-            setSearchResults={setSearchResults}
-          />
+        <Box
+          id="content-box"
+          display="flex"
+          flexDirection="row"
+          justifyContent="space-around"
+          height="500px"
+        >
+          <Box
+            id="tab-component-box"
+            display="flex"
+            flexDirection="column"
+            width="45%"
+            height="500px"
+          >
+            <TabComponent
+              comparingTable={comparingTable}
+              lookupForm={lookupForm}
+              singleLocationTable={singleLocationTable}
+            />
+          </Box>
+          <Box
+            id="data-grid-box"
+            display="flex"
+            flexDirection="column"
+            width="45%"
+            height="500px"
+          >
+            <SearchResults
+              searchResults={searchResults}
+              setSelectedResult={setSelectedResult}
+              setApiError={setApiError}
+              setFullList={setFullList}
+              setSearchResults={setSearchResults}
+            />
+          </Box>
         </Box>
       </Box>
     </>
