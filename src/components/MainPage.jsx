@@ -9,7 +9,7 @@ import axios from "axios";
 import SelectLocationTable from "./SelectLcoationTable";
 
 function MainPage() {
-  // fulllist so it only calls API once
+  // full list so it only calls API once
   const [fullList, setFullList] = useState(null);
 
   // resulting list as the user types
@@ -24,21 +24,22 @@ function MainPage() {
   // location of the node backend
   const baseURL = "http://localhost:3785";
 
-  // function to retireve data from the node backend
+  // function to retrieve data from the node backend
   const retrieveLocations = async (url) => {
     try {
       setApiError(null);
-      const res = await axios.get([`${url}`]);
+      const res = await axios.get(`${url}`);
       return res.data;
     } catch (err) {
       setApiError(err);
+      console.error(apiError);
     }
   };
 
   // calls the function to the node backend
   useEffect(() => {
     retrieveLocations(baseURL).then((data) => {
-      // console.log(data);
+      console.log(data);
     });
   }, [baseURL]);
 
@@ -87,49 +88,22 @@ function MainPage() {
   return (
     <>
       <h3>Location Lookup</h3>
-      <Box id="body-box" display="flex" flexDirection="column">
-        {/*<Box>*/}
-        {/*  <LookupForm*/}
-        {/*    searchObj={searchObj}*/}
-        {/*    setSearchObj={setSearchObj}*/}
-        {/*    handleChange={handleChange}*/}
-        {/*  />*/}
-        {/*</Box>*/}
-        <Box
-          id="content-box"
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-around"
-          height="500px"
-        >
-          <Box
-            id="tab-component-box"
-            display="flex"
-            flexDirection="column"
-            width="45%"
-            height="500px"
-          >
-            <TabComponent
-              comparingTable={comparingTable}
-              lookupForm={lookupForm}
-              singleLocationTable={singleLocationTable}
-            />
-          </Box>
-          <Box
-            id="data-grid-box"
-            display="flex"
-            flexDirection="column"
-            width="45%"
-            height="500px"
-          >
-            <SearchResults
-              searchResults={searchResults}
-              setSelectedResult={setSelectedResult}
-              setApiError={setApiError}
-              setFullList={setFullList}
-              setSearchResults={setSearchResults}
-            />
-          </Box>
+      <Box id="content-box">
+        <Box id="tab-component-box" className="body-content-boxes">
+          <TabComponent
+            comparingTable={comparingTable}
+            lookupForm={lookupForm}
+            singleLocationTable={singleLocationTable}
+          />
+        </Box>
+        <Box id="data-grid-box" className="body-content-boxes">
+          <SearchResults
+            searchResults={searchResults}
+            setSelectedResult={setSelectedResult}
+            setApiError={setApiError}
+            setFullList={setFullList}
+            setSearchResults={setSearchResults}
+          />
         </Box>
       </Box>
     </>

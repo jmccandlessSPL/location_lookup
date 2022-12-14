@@ -48,7 +48,6 @@ export const dateAttributes = [
 ];
 
 // location attributes for the grid. gets rid of nested obj and
-
 export const LocationNamingMapMinimized = {
   id: "ID",
   locName: "Name",
@@ -98,6 +97,18 @@ export const AbbrLocationMapForDataGrid = {
 
 export const LocationInfoFromTags = ["Location", "Station", "Station No."];
 
+export function nestedObjManipNONORIG(obj) {
+  const flattened = {};
+  Object.keys(obj).forEach((key) => {
+    const value = obj[key];
+    if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+      Object.assign(flattened, nestedObjManipNONORIG(value));
+    } else {
+      flattened[key] = value;
+    }
+  });
+  return flattened;
+}
 /*
 
 /*

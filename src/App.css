@@ -1,93 +1,64 @@
 .App {
   text-align: center;
+  font-family:  "Roboto","Helvetica","Arial",sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*** Main Page ***/
+#content-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 500px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  width: 100%;
-  background-color: #282c34;
-  min-height: 100vh;
+.body-content-boxes {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 45%;
+  height: 500px;
 }
 
-.App-link {
-  color: #61dafb;
+/*** Tab Component ***/
+#tab-panel-full {
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/*** Tab panel ***/
+.tab-panel-component {
+  height: 100%;
+  max-height: 452px;
 }
 
-table {
-  display: table;
-  border-collapse: separate;
-  box-sizing: border-box;
-  text-indent: initial;
-  border-spacing: unset;
-  border-color: grey;
+.single-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-tr {
-  text-align: left;
-
+.tab-header {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
 }
 
-tr:nth-child(even) > td {
-  filter: brightness(.90);
+.tab-body-title {
+  grid-column: 2;
 }
-
-pre {
-  font-family: inherit;
-  /*display: flex;*/
-  /*flex-direction: row;*/
+/*** Lookup Form ***/
+.field-input-box {
+  justify-self: stretch;
+  margin: 5px 10px;
+  height: max-content;
 }
 
 .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
   width: 100%;
 }
 
-.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
-  height: 40px;
-}
 
-/*.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {*/
-/*  padding:0;*/
-/*}*/
-
-.MuiInputBase-input .MuiOutlinedInput-input {
-  padding: 0
-
-}
-
-.compare-table-box {
-  overflow-y: scroll;
-  /*height: 100%;*/
-}
-
-.field-input-box {
-  justify-self: stretch;
-  margin: 5px 10px;
-  height: max-content;
+/*** Single Location ***/
+.tab-body-title-right {
+  align-self: center;
 }
 
 .title-block {
@@ -96,6 +67,10 @@ pre {
   border-bottom: 1px solid #eee;
   text-align: center;
   width: 150px;
+}
+
+.table-divider {
+  border-right: solid 1px rgb(238, 238, 238);
 }
 
 .att-name {
@@ -107,14 +82,41 @@ pre {
   padding:0 10px
 }
 
-/*.MuiInputBase-input {*/
-/* */
-/*}*/
 
-/*.MuiInputBase-root {*/
-/*  height: 2rem;*/
-/*}*/
+table {
+  display: table;
+  border-collapse: separate;
+  box-sizing: border-box;
+  text-indent: initial;
+  border-spacing: unset;
+  border-color: grey;
+  width: 100%;
+}
 
-/*.MuiFormLabel-root {*/
-/*  transform: translate(2px, 6px) scale(1);*/
-/*}*/
+tr {
+  text-align: left;
+}
+
+tr:nth-child(even) > td {
+  filter: brightness(.90);
+}
+
+pre {
+  font-family: inherit;
+}
+
+
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+  height: 40px;
+}
+
+.MuiInputBase-input .MuiOutlinedInput-input {
+  padding: 0
+}
+
+#compare-data-table, #single-location-info {
+  overflow: auto;
+}
+
+
+

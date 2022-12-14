@@ -1,38 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, styled, TextField } from "@mui/material";
+import { Box, styled, TextField } from "@mui/material";
 
 import "react-diff-view/style/index.css";
-import { LocationNamingMap } from "../util/constants";
+import { LocationNamingMap, nestedObjManipNONORIG } from "../util/constants";
 
 const EditTableTextArea = styled(TextField)(({ theme }) => ({
   width: "100%",
   "& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
     padding: "0 5px",
   },
-  // padding: "0",
 }));
 
 function SelectLocationTable({ objCompare }) {
   const [canEdit, setCanEdit] = useState(false);
 
   const [editableObj, setEditableObj] = useState({});
-
-  function nestedObjManipNONORIG(obj) {
-    const flattened = {};
-    Object.keys(obj).forEach((key) => {
-      const value = obj[key];
-      if (
-        typeof value === "object" &&
-        value !== null &&
-        !Array.isArray(value)
-      ) {
-        Object.assign(flattened, nestedObjManipNONORIG(value));
-      } else {
-        flattened[key] = value;
-      }
-    });
-    return flattened;
-  }
 
   useEffect(() => {
     setEditableObj(nestedObjManipNONORIG(objCompare));
@@ -43,7 +25,7 @@ function SelectLocationTable({ objCompare }) {
     setCanEdit(true);
   }
 
-  function handleSaveButton(e) {
+  function handleSaveButton() {
     setCanEdit(false);
     console.log(editableObj);
     //need to put the obj back into the codebase formatting
@@ -56,27 +38,18 @@ function SelectLocationTable({ objCompare }) {
 
   return (
     <>
-      <Box
-        className="tab-header"
-        display="grid"
-        gridTemplateColumns="1fr 3fr 1fr"
-      >
-        <h3 style={{ gridColumn: "2" }}>Single Location</h3>
-        <Box className="edit-data-box" alignSelf="center">
+      <Box className="tab-header">
+        <h3 className="tab-body-title">Single Location</h3>
+        <Box className="tab-body-title-right">
           <button onClick={handleSaveButton}>save</button>
           <button onClick={handleEditButton}>edit</button>
         </Box>
       </Box>
-      <Box id="single-location-info" overflow="auto">
-        <table style={{ width: "100%" }}>
+      <Box id="single-location-info">
+        <table>
           <tbody className="select-local-table">
             <tr>
-              <td
-                style={{ borderRight: "solid 1px rgb(238, 238, 238)" }}
-                className="title-block"
-              >
-                Attribute
-              </td>
+              <td className="title-block table-divider">Attribute</td>
               <td className="title-block">Value</td>
             </tr>
             {Object.keys(LocationNamingMap)
@@ -88,11 +61,7 @@ function SelectLocationTable({ objCompare }) {
               .map((rowTitle, i) => {
                 return (
                   <tr key={i}>
-                    <td
-                      className="att-name"
-                      align="left"
-                      style={{ borderRight: "solid 1px rgb(238, 238, 238)" }}
-                    >
+                    <td className="att-name table-divider" align="left">
                       <Box className="pre-style">
                         {LocationNamingMap[`${rowTitle}`]}
                       </Box>

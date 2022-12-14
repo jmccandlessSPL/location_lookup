@@ -5,44 +5,27 @@ import { useMemo } from "react";
 import tokenize from "./tokenize";
 
 import "react-diff-view/style/index.css";
-import { LocationNamingMapMinimized } from "../util/constants";
+import {
+  LocationNamingMapMinimized,
+  nestedObjManipNONORIG,
+} from "../util/constants";
 
 function CompareTable({ objCompare, dataToMerge }) {
   const [totalCompFieldsArr, setTotalCompFieldsArr] = useState([
-    ...new Set([
-      ...Object.keys(objCompare),
-      ...Object.keys(dataToMerge),
-      "lng",
-    ]),
+    ...new Set(
+      [...Object.keys(objCompare), ...Object.keys(dataToMerge), "lng"].filter(
+        (attr) => attr !== "lon"
+      )
+    ),
   ]);
 
   const [inputText, setInputText] = useState("");
   const [compareText, setCompareText] = useState("");
-
-  function nestedObjManipNONORIG(obj) {
-    const flattened = {};
-    Object.keys(obj).forEach((key) => {
-      const value = obj[key];
-      if (
-        typeof value === "object" &&
-        value !== null &&
-        !Array.isArray(value)
-      ) {
-        Object.assign(flattened, nestedObjManipNONORIG(value));
-      } else {
-        flattened[key] = value;
-      }
-    });
-    return flattened;
-  }
-
   const [{ hunks }] = useState("");
 
   useMemo(() => tokenize(hunks), [hunks]);
 
   useEffect(() => {
-    // setInputText(createText(dataToMerge));
-    // setCompareText(createText(objCompare));
     setInputText(createText(nestedObjManipNONORIG(dataToMerge)));
     setCompareText(createText(nestedObjManipNONORIG(objCompare)));
   }, [dataToMerge, objCompare]);
@@ -60,8 +43,10 @@ function CompareTable({ objCompare, dataToMerge }) {
 
   return (
     <>
-      <h3 style={{ gridColumn: "2" }}>Compare Locations</h3>
-      <Box id="compare-data-table" overflow="auto">
+      <Box className="tab-header">
+        <h3 className="tab-body-title">Compare Locations</h3>
+      </Box>
+      <Box id="compare-data-table">
         <ReactDiffViewer
           leftTitle={"Input Location"}
           rightTitle={"Existing Location"}
@@ -70,8 +55,8 @@ function CompareTable({ objCompare, dataToMerge }) {
           splitView={true}
           hideLineNumbers={true}
           showDiffOnly={false}
-          codeFoldMessageRenderer={(number) => {
-            return `Expand Rows (${number} rows have same data)`;
+          codeFoldMessageRenderer={(num1) => {
+            return <p>Expand Rows ({num1} rows have same data)</p>;
           }}
           // extraLinesSurroundingDiff={5}
           onLineNumberClick={(lineId) => console.log("click")}
@@ -85,7 +70,6 @@ function CompareTable({ objCompare, dataToMerge }) {
             },
             content: {
               //td
-              // backgroundColor: "white",
             },
             diffContainer: {
               // table
