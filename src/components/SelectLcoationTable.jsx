@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Box, styled, TextField } from "@mui/material";
 
 import "react-diff-view/style/index.css";
-import { LocationNamingMap, nestedObjManipNONORIG } from "../util/constants";
+import {
+  LocationNamingMap,
+  MinimumFieldsSureVue,
+  nestedObjManipNONORIG,
+} from "../util/constants";
 
 const EditTableTextArea = styled(TextField)(({ theme }) => ({
   width: "100%",
@@ -11,7 +15,7 @@ const EditTableTextArea = styled(TextField)(({ theme }) => ({
   },
 }));
 
-function SelectLocationTable({ objCompare }) {
+function SelectLocationTable({ objCompare, isInfoDetailed }) {
   const [canEdit, setCanEdit] = useState(false);
 
   const [editableObj, setEditableObj] = useState({});
@@ -41,8 +45,8 @@ function SelectLocationTable({ objCompare }) {
       <Box className="tab-header">
         <h3 className="tab-body-title">Single Location</h3>
         <Box className="tab-body-title-right">
-          <button onClick={handleSaveButton}>save</button>
           <button onClick={handleEditButton}>edit</button>
+          <button onClick={handleSaveButton}>save</button>
         </Box>
       </Box>
       <Box id="single-location-info">
@@ -52,7 +56,9 @@ function SelectLocationTable({ objCompare }) {
               <td className="title-block table-divider">Attribute</td>
               <td className="title-block">Value</td>
             </tr>
-            {Object.keys(LocationNamingMap)
+            {Object.keys(
+              isInfoDetailed ? LocationNamingMap : MinimumFieldsSureVue
+            )
               ?.filter(
                 (rowTitle) =>
                   rowTitle !== "id" && rowTitle !== "keyy" && rowTitle !== "lon"
