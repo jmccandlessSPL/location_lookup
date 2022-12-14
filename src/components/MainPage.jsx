@@ -39,7 +39,9 @@ function MainPage() {
   // calls the function to the node backend
   useEffect(() => {
     retrieveLocations(baseURL).then((data) => {
-      console.log(data);
+      if (data) {
+        console.log(data);
+      }
     });
   }, [baseURL]);
 
