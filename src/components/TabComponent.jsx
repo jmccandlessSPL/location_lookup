@@ -11,15 +11,8 @@ function TabComponent(props) {
   };
   return (
     <>
-      <Box
-        id="tab-panel-full"
-        // flexGrow: 1,
-        bgcolor="background.paper"
-        display="flex"
-        flexDirection="column"
-      >
+      <Box id="tab-panel-full">
         <Tabs
-          // orientation="vertical"
           value={value}
           onChange={handleChange}
           sx={{ borderBottom: 1, borderColor: "divider" }}

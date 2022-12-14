@@ -1,6 +1,87 @@
 .App {
   text-align: center;
+  font-family:  "Roboto","Helvetica","Arial",sans-serif;
 }
+
+/*** Main Page ***/
+#content-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 500px;
+}
+
+.body-content-boxes {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  height: 500px;
+}
+
+/*** Tab Component ***/
+#tab-panel-full {
+  display: flex;
+  flex-direction: column;
+}
+
+/*** Tab panel ***/
+.tab-panel-component {
+  height: 100%;
+  max-height: 452px;
+}
+
+.single-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tab-header {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+}
+
+.tab-body-title {
+  grid-column: 2;
+}
+/*** Lookup Form ***/
+.field-input-box {
+  justify-self: stretch;
+  margin: 5px 10px;
+  height: max-content;
+}
+
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  width: 100%;
+}
+
+
+/*** Single Location ***/
+.tab-body-title-right {
+  align-self: center;
+}
+
+.title-block {
+  background: #fafbfc;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  width: 150px;
+}
+
+.table-divider {
+  border-right: solid 1px rgb(238, 238, 238);
+}
+
+.att-name {
+  background-color: white;
+}
+
+.pre-style {
+  line-height: 25px;
+  padding:0 10px
+}
+
 
 table {
   display: table;
@@ -9,6 +90,7 @@ table {
   text-indent: initial;
   border-spacing: unset;
   border-color: grey;
+  width: 100%;
 }
 
 tr {
@@ -21,63 +103,20 @@ tr:nth-child(even) > td {
 
 pre {
   font-family: inherit;
-  /*display: flex;*/
-  /*flex-direction: row;*/
 }
 
-.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
-  width: 100%;
-}
 
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
   height: 40px;
 }
 
-/*.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {*/
-/*  padding:0;*/
-/*}*/
-
 .MuiInputBase-input .MuiOutlinedInput-input {
   padding: 0
-
 }
 
-.compare-table-box {
-  overflow-y: scroll;
-  /*height: 100%;*/
+#compare-data-table, #single-location-info {
+  overflow: auto;
 }
 
-.field-input-box {
-  justify-self: stretch;
-  margin: 5px 10px;
-  height: max-content;
-}
 
-.title-block {
-  background: #fafbfc;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  text-align: center;
-  width: 150px;
-}
 
-.att-name {
-  background-color: white;
-}
-
-.pre-style {
-  line-height: 25px;
-  padding:0 10px
-}
-
-/*.MuiInputBase-input {*/
-/* */
-/*}*/
-
-/*.MuiInputBase-root {*/
-/*  height: 2rem;*/
-/*}*/
-
-/*.MuiFormLabel-root {*/
-/*  transform: translate(2px, 6px) scale(1);*/
-/*}*/

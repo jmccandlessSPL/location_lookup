@@ -9,7 +9,6 @@ const EditTableTextArea = styled(TextField)(({ theme }) => ({
   "& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
     padding: "0 5px",
   },
-  // padding: "0",
 }));
 
 function SelectLocationTable({ objCompare }) {
@@ -56,27 +55,18 @@ function SelectLocationTable({ objCompare }) {
 
   return (
     <>
-      <Box
-        className="tab-header"
-        display="grid"
-        gridTemplateColumns="1fr 3fr 1fr"
-      >
-        <h3 style={{ gridColumn: "2" }}>Single Location</h3>
-        <Box className="edit-data-box" alignSelf="center">
+      <Box className="tab-header">
+        <h3 className="tab-body-title">Single Location</h3>
+        <Box className="tab-body-title-right">
           <button onClick={handleSaveButton}>save</button>
           <button onClick={handleEditButton}>edit</button>
         </Box>
       </Box>
-      <Box id="single-location-info" overflow="auto">
-        <table style={{ width: "100%" }}>
+      <Box id="single-location-info">
+        <table>
           <tbody className="select-local-table">
             <tr>
-              <td
-                style={{ borderRight: "solid 1px rgb(238, 238, 238)" }}
-                className="title-block"
-              >
-                Attribute
-              </td>
+              <td className="title-block table-divider">Attribute</td>
               <td className="title-block">Value</td>
             </tr>
             {Object.keys(LocationNamingMap)
@@ -88,11 +78,7 @@ function SelectLocationTable({ objCompare }) {
               .map((rowTitle, i) => {
                 return (
                   <tr key={i}>
-                    <td
-                      className="att-name"
-                      align="left"
-                      style={{ borderRight: "solid 1px rgb(238, 238, 238)" }}
-                    >
+                    <td className="att-name table-divider" align="left">
                       <Box className="pre-style">
                         {LocationNamingMap[`${rowTitle}`]}
                       </Box>

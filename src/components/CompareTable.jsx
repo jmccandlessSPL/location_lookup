@@ -60,8 +60,10 @@ function CompareTable({ objCompare, dataToMerge }) {
 
   return (
     <>
-      <h3 style={{ gridColumn: "2" }}>Compare Locations</h3>
-      <Box id="compare-data-table" overflow="auto">
+      <Box className="tab-header">
+        <h3 className="tab-body-title">Compare Locations</h3>
+      </Box>
+      <Box id="compare-data-table">
         <ReactDiffViewer
           leftTitle={"Input Location"}
           rightTitle={"Existing Location"}
@@ -85,7 +87,6 @@ function CompareTable({ objCompare, dataToMerge }) {
             },
             content: {
               //td
-              // backgroundColor: "white",
             },
             diffContainer: {
               // table

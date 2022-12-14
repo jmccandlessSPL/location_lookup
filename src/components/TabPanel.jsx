@@ -7,23 +7,13 @@ function TabPanel(props) {
   return (
     <>
       <Box
+        id={`simple-tabpanel-${index}`}
+        className="tab-panel-component"
         role="tabpanel"
         hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
         aria-labelledby={`simple-tab-${index}`}
-        height="100%"
-        maxHeight="452px"
       >
-        {value === index && (
-          <Box
-            id="single-tab"
-            display="flex"
-            flexDirection="column"
-            height="100%"
-          >
-            {children}
-          </Box>
-        )}
+        {value === index && <Box className="single-tab">{children}</Box>}
       </Box>
     </>
   );
