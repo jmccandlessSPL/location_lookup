@@ -11,35 +11,33 @@ function TabComponent(props) {
   };
   return (
     <>
-      <Box width="40%">
-        <Box
-          sx={{
-            // flexGrow: 1,
-            bgcolor: "background.paper",
-            display: "flex",
-            flexDirection: "column",
-          }}
+      <Box
+        id="tab-panel-full"
+        // flexGrow: 1,
+        bgcolor="background.paper"
+        display="flex"
+        flexDirection="column"
+      >
+        <Tabs
+          // orientation="vertical"
+          value={value}
+          onChange={handleChange}
+          sx={{ borderBottom: 1, borderColor: "divider" }}
         >
-          <Tabs
-            // orientation="vertical"
-            value={value}
-            onChange={handleChange}
-            sx={{ borderBottom: 1, borderColor: "divider" }}
-          >
-            <Tab label="Edit" />
-            <Tab label="Compare" />
-          </Tabs>
-        </Box>
-        {/*<TabPanel value={value} index={0}>*/}
-        {/*  {lookupForm}*/}
-        {/*</TabPanel>*/}
-        <TabPanel value={value} index={0}>
-          {singleLocationTable}
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          {comparingTable}
-        </TabPanel>
+          <Tab label="Input" />
+          <Tab label="Compare" />
+          <Tab label="Edit" />
+        </Tabs>
       </Box>
+      <TabPanel value={value} index={0}>
+        {lookupForm}
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        {comparingTable}
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        {singleLocationTable}
+      </TabPanel>
     </>
   );
 }

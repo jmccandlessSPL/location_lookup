@@ -57,19 +57,17 @@ function SearchResults({
 
   return (
     <>
-      <Box height="600px" width="50%">
-        <h2>Location List</h2>
-        <DataGrid
-          onCellClick={(rowData) => setSelectedResult(rowData.row)}
-          rows={searchResults || []}
-          columns={dataColumns}
-          pageSize={10}
-          rowsPerPageOptions={[10]}
-          checkboxSelection={false}
-          disableMultipleSelection={true}
-          // disableSelectionOnClick
-        />
-      </Box>
+      <h2>Location List</h2>
+      <DataGrid
+        onCellClick={(rowData) => setSelectedResult(rowData.row)}
+        rows={searchResults || []}
+        columns={dataColumns}
+        pageSize={10}
+        rowsPerPageOptions={[10]}
+        checkboxSelection={false}
+        disableMultipleSelection={true}
+        // disableSelectionOnClick
+      />
     </>
   );
 }
