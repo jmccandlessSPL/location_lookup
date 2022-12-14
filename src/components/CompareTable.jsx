@@ -12,11 +12,11 @@ import {
 
 function CompareTable({ objCompare, dataToMerge }) {
   const [totalCompFieldsArr, setTotalCompFieldsArr] = useState([
-    ...new Set([
-      ...Object.keys(objCompare),
-      ...Object.keys(dataToMerge),
-      "lng",
-    ]),
+    ...new Set(
+      [...Object.keys(objCompare), ...Object.keys(dataToMerge), "lng"].filter(
+        (attr) => attr !== "lon"
+      )
+    ),
   ]);
 
   const [inputText, setInputText] = useState("");
