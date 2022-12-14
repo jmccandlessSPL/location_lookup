@@ -88,25 +88,25 @@ function MainPage() {
     <>
       <h3>Location Lookup</h3>
       <Box display="flex" flexDirection="column">
-        <Box>
-          <LookupForm
-            searchObj={searchObj}
-            setSearchObj={setSearchObj}
-            handleChange={handleChange}
-          />
-        </Box>
+        {/*<Box>*/}
+        {/*  <LookupForm*/}
+        {/*    searchObj={searchObj}*/}
+        {/*    setSearchObj={setSearchObj}*/}
+        {/*    handleChange={handleChange}*/}
+        {/*  />*/}
+        {/*</Box>*/}
         <Box display="flex" flexDirection="row" justifyContent="space-around">
+          <TabComponent
+            comparingTable={comparingTable}
+            lookupForm={lookupForm}
+            singleLocationTable={singleLocationTable}
+          />
           <SearchResults
             searchResults={searchResults}
             setSelectedResult={setSelectedResult}
             setApiError={setApiError}
             setFullList={setFullList}
             setSearchResults={setSearchResults}
-          />
-          <TabComponent
-            comparingTable={comparingTable}
-            // lookupForm={lookupForm}
-            singleLocationTable={singleLocationTable}
           />
         </Box>
       </Box>
