@@ -26,7 +26,7 @@ function TabComponent(props) {
             onChange={handleChange}
             sx={{ borderBottom: 1, borderColor: "divider" }}
           >
-            <Tab label="Selected" />
+            <Tab label="Edit" />
             <Tab label="Compare" />
           </Tabs>
         </Box>

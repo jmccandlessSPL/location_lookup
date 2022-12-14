@@ -96,18 +96,17 @@ function MainPage() {
           />
         </Box>
         <Box display="flex" flexDirection="row" justifyContent="space-around">
-          <TabComponent
-            comparingTable={comparingTable}
-            // lookupForm={lookupForm}
-            singleLocationTable={singleLocationTable}
-          />
-
           <SearchResults
             searchResults={searchResults}
             setSelectedResult={setSelectedResult}
             setApiError={setApiError}
             setFullList={setFullList}
             setSearchResults={setSearchResults}
+          />
+          <TabComponent
+            comparingTable={comparingTable}
+            // lookupForm={lookupForm}
+            singleLocationTable={singleLocationTable}
           />
         </Box>
       </Box>
