@@ -14,7 +14,7 @@ function TabComponent(props) {
       <Box id="tab-panel-full">
         <Tabs
           value={value}
-          onChange={handleChange}
+          onChange={(e, val) => handleChange(e, val)}
           sx={{ borderBottom: 1, borderColor: "divider" }}
         >
           <Tab label="Input" />

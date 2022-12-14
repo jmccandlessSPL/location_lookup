@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import {
   AbbrLocationMapForDataGrid,
@@ -14,14 +13,14 @@ function SearchResults({
   setFullList,
   setSearchResults,
 }) {
-  const [dataColumns, setDataColumns] = useState([{ field: "id" }]);
+  const [dataColumns, setDataColumns] = useState([{}]);
 
   const baseURL = "https://api.mdm.sandbox.suresuiteapps.com/v1/locations/";
 
   const retrieveLocations = async (url) => {
     try {
       setApiError(null);
-      const res = await axios.get([`${url}`]);
+      const res = await axios.get(`${url}`);
       return res.data;
     } catch (err) {
       setApiError(err);
@@ -61,7 +60,7 @@ function SearchResults({
       <DataGrid
         onCellClick={(rowData) => setSelectedResult(rowData.row)}
         rows={searchResults || []}
-        columns={dataColumns}
+        columns={dataColumns || null}
         pageSize={10}
         rowsPerPageOptions={[10]}
         checkboxSelection={false}

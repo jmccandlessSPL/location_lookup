@@ -9,7 +9,7 @@ import axios from "axios";
 import SelectLocationTable from "./SelectLcoationTable";
 
 function MainPage() {
-  // fulllist so it only calls API once
+  // full list so it only calls API once
   const [fullList, setFullList] = useState(null);
 
   // resulting list as the user types
@@ -24,21 +24,22 @@ function MainPage() {
   // location of the node backend
   const baseURL = "http://localhost:3785";
 
-  // function to retireve data from the node backend
+  // function to retrieve data from the node backend
   const retrieveLocations = async (url) => {
     try {
       setApiError(null);
-      const res = await axios.get([`${url}`]);
+      const res = await axios.get(`${url}`);
       return res.data;
     } catch (err) {
       setApiError(err);
+      console.error(apiError);
     }
   };
 
   // calls the function to the node backend
   useEffect(() => {
     retrieveLocations(baseURL).then((data) => {
-      // console.log(data);
+      console.log(data);
     });
   }, [baseURL]);
 

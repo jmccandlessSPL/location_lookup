@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, styled, TextField } from "@mui/material";
+import { Box, styled, TextField } from "@mui/material";
 
 import "react-diff-view/style/index.css";
-import { LocationNamingMap } from "../util/constants";
+import { LocationNamingMap, nestedObjManipNONORIG } from "../util/constants";
 
 const EditTableTextArea = styled(TextField)(({ theme }) => ({
   width: "100%",
@@ -16,23 +16,6 @@ function SelectLocationTable({ objCompare }) {
 
   const [editableObj, setEditableObj] = useState({});
 
-  function nestedObjManipNONORIG(obj) {
-    const flattened = {};
-    Object.keys(obj).forEach((key) => {
-      const value = obj[key];
-      if (
-        typeof value === "object" &&
-        value !== null &&
-        !Array.isArray(value)
-      ) {
-        Object.assign(flattened, nestedObjManipNONORIG(value));
-      } else {
-        flattened[key] = value;
-      }
-    });
-    return flattened;
-  }
-
   useEffect(() => {
     setEditableObj(nestedObjManipNONORIG(objCompare));
   }, [objCompare]);
@@ -42,7 +25,7 @@ function SelectLocationTable({ objCompare }) {
     setCanEdit(true);
   }
 
-  function handleSaveButton(e) {
+  function handleSaveButton() {
     setCanEdit(false);
     console.log(editableObj);
     //need to put the obj back into the codebase formatting
