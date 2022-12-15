@@ -79,14 +79,17 @@ function CompareTable({ objCompare, dataToMerge, isInfoDetailed }) {
             },
             content: {
               //td
+              "& tbody": {},
+              // need this width here for styling
+              width: "0",
             },
             diffContainer: {
               // table
               "& tbody": {},
             },
             marker: {
-              padding: "0",
               maxWidth: "0px",
+              padding: "0",
               opacity: "0",
             },
             titleBlock: {
