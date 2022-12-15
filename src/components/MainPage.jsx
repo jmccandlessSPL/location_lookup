@@ -10,6 +10,7 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
+  Typography,
 } from "@mui/material";
 import TabComponent from "./TabComponent";
 import axios from "axios";
@@ -110,58 +111,71 @@ function MainPage() {
 
   return (
     <>
-      <h3>Location Lookup</h3>
-      <Box id="global-controls">
-        <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">
-            Data Displayed
-          </FormLabel>
-          <RadioGroup
-            sx={{ display: "flex", flexDirection: "row" }}
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="Quick"
-            name="radio-buttons-group"
-            onChange={(e) => handleRadio(e)}
-          >
-            <FormControlLabel
-              sx={{
-                width: "100px",
-                margin: "0",
-                justifyContent: "start",
-              }}
-              value="Quick"
-              control={<Radio size="small" />}
-              label="Quick"
-            />
-            <FormControlLabel
-              value="Detailed"
-              sx={{
-                width: "100px",
-                margin: "0",
-                justifyContent: "center",
-              }}
-              control={<Radio size="small" />}
-              label="Detailed"
-            />
-          </RadioGroup>
-        </FormControl>
-      </Box>
-      <Box id="content-box">
-        <Box id="tab-component-box" className="body-content-boxes">
-          <TabComponent
-            comparingTable={comparingTable}
-            lookupForm={lookupForm}
-            singleLocationTable={singleLocationTable}
-          />
+      <Box id="app-container" display="grid" gridTemplateRows="auto 1fr">
+        <Box
+          id="nav-bar"
+          display="grid"
+          gridTemplateColumns="1fr 1fr 1fr"
+          height="8vh"
+          alignItems="center"
+          backgroundColor="#68a696"
+          borderRadius="5px"
+        >
+          <Typography variant="h3">Location Lookup</Typography>
         </Box>
-        <Box id="data-grid-box" className="body-content-boxes">
-          <SearchResults
-            searchResults={searchResults}
-            setSelectedResult={setSelectedResult}
-            setApiError={setApiError}
-            setFullList={setFullList}
-            setSearchResults={setSearchResults}
-          />
+
+        <Box id="content-box">
+          <Box id="tab-component-box" className="body-content-boxes">
+            <Box id="global-controls">
+              <FormControl sx={{ marginTop: "10px" }}>
+                <FormLabel id="demo-radio-buttons-group-label">
+                  Data Displayed
+                </FormLabel>
+                <RadioGroup
+                  sx={{ display: "flex", flexDirection: "row" }}
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue="Quick"
+                  name="radio-buttons-group"
+                  onChange={(e) => handleRadio(e)}
+                >
+                  <FormControlLabel
+                    sx={{
+                      width: "100px",
+                      margin: "0",
+                      justifyContent: "start",
+                    }}
+                    value="Quick"
+                    control={<Radio size="small" />}
+                    label="Quick"
+                  />
+                  <FormControlLabel
+                    value="Detailed"
+                    sx={{
+                      width: "100px",
+                      margin: "0",
+                      justifyContent: "center",
+                    }}
+                    control={<Radio size="small" />}
+                    label="Detailed"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Box>
+            <TabComponent
+              comparingTable={comparingTable}
+              lookupForm={lookupForm}
+              singleLocationTable={singleLocationTable}
+            />
+          </Box>
+          <Box id="data-grid-box" className="body-content-boxes">
+            <SearchResults
+              searchResults={searchResults}
+              setSelectedResult={setSelectedResult}
+              setApiError={setApiError}
+              setFullList={setFullList}
+              setSearchResults={setSearchResults}
+            />
+          </Box>
         </Box>
       </Box>
     </>
