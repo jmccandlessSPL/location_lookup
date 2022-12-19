@@ -72,6 +72,12 @@ export const LocationNamingMapMinimized = {
   createdOn: "Created On",
 };
 
+export const MinimumFieldsSureVue = {
+  locName: "Name",
+  lat: "Latitude",
+  lng: "Longitude",
+};
+
 export const AbbrLocationMapForDataGrid = {
   id: "ID",
   locName: "Name",

@@ -7,10 +7,11 @@ import tokenize from "./tokenize";
 import "react-diff-view/style/index.css";
 import {
   LocationNamingMapMinimized,
+  MinimumFieldsSureVue,
   nestedObjManipNONORIG,
 } from "../util/constants";
 
-function CompareTable({ objCompare, dataToMerge }) {
+function CompareTable({ objCompare, dataToMerge, isInfoDetailed }) {
   const [totalCompFieldsArr, setTotalCompFieldsArr] = useState([
     ...new Set(
       [...Object.keys(objCompare), ...Object.keys(dataToMerge), "lng"].filter(
@@ -18,6 +19,8 @@ function CompareTable({ objCompare, dataToMerge }) {
       )
     ),
   ]);
+
+  const [quickArr, setQuickArr] = useState(Object.keys(MinimumFieldsSureVue));
 
   const [inputText, setInputText] = useState("");
   const [compareText, setCompareText] = useState("");
@@ -28,11 +31,17 @@ function CompareTable({ objCompare, dataToMerge }) {
   useEffect(() => {
     setInputText(createText(nestedObjManipNONORIG(dataToMerge)));
     setCompareText(createText(nestedObjManipNONORIG(objCompare)));
-  }, [dataToMerge, objCompare]);
+  }, [dataToMerge, objCompare, isInfoDetailed]);
 
   function createText(obj) {
+    let array;
+    if (isInfoDetailed) {
+      array = totalCompFieldsArr;
+    } else {
+      array = quickArr;
+    }
     let text = ``;
-    for (const att of totalCompFieldsArr.sort()) {
+    for (const att of array.sort()) {
       if (LocationNamingMapMinimized[`${att}`]) {
         text = text.concat(`
   ${LocationNamingMapMinimized[`${att}`]}: ${obj[`${att}`] || ""}`);
@@ -70,14 +79,17 @@ function CompareTable({ objCompare, dataToMerge }) {
             },
             content: {
               //td
+              "& tbody": {},
+              // need this width here for styling
+              width: "0",
             },
             diffContainer: {
               // table
               "& tbody": {},
             },
             marker: {
-              padding: "0",
               maxWidth: "0px",
+              padding: "0",
               opacity: "0",
             },
             titleBlock: {

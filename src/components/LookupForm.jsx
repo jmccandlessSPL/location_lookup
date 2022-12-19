@@ -1,5 +1,9 @@
 import React from "react";
-import { dateAttributes, LocationNamingMapMinimized } from "../util/constants";
+import {
+  dateAttributes,
+  LocationNamingMapMinimized,
+  MinimumFieldsSureVue,
+} from "../util/constants";
 import { Box, FormControl, styled, TextField } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -13,7 +17,7 @@ const StyledFormControl = styled(FormControl)(({ theme }) => ({
   borderRadius: "4px",
 }));
 
-function LookupForm({ handleChange, searchObj, setSearchObj }) {
+function LookupForm({ handleChange, searchObj, setSearchObj, isInfoDetailed }) {
   // this function allows the field to read the value as it updates from CompareTable
   function handleName(obj, k) {
     return obj[`${k}`];
@@ -30,7 +34,9 @@ function LookupForm({ handleChange, searchObj, setSearchObj }) {
         <h3 className="tab-body-title">Location Input</h3>
       </Box>
       <StyledFormControl>
-        {Object.entries(LocationNamingMapMinimized).map(([key, val], i) => {
+        {Object.entries(
+          isInfoDetailed ? LocationNamingMapMinimized : MinimumFieldsSureVue
+        ).map(([key, val], i) => {
           if (dateAttributes.includes(key)) {
             return (
               <Box key={i} className="field-input-box">

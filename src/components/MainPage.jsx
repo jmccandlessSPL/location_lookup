@@ -3,7 +3,17 @@ import LookupForm from "./LookupForm";
 import SearchResults from "./SearchResults";
 import CompareTable from "./CompareTable";
 import { LocationNamingMapMinimized } from "../util/constants";
-import { Box, Paper } from "@mui/material";
+
+import {
+  Box,
+  Paper,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
+
 import TabComponent from "./TabComponent";
 import axios from "axios";
 import SelectLocationTable from "./SelectLcoationTable";
@@ -20,6 +30,8 @@ function MainPage() {
 
   // gets information from the row selected from data grid
   const [selectedResult, setSelectedResult] = useState([]);
+
+  const [isInfoDetailed, setIsInfoDetailed] = useState(false);
 
   // location of the node backend
   const baseURL = "http://localhost:3785";
@@ -69,20 +81,32 @@ function MainPage() {
     }
   }
 
+  function handleRadio(e) {
+    setIsInfoDetailed(e.target.value === "Detailed");
+  }
+
   const lookupForm = (
     <LookupForm
       searchObj={searchObj}
       setSearchObj={setSearchObj}
       handleChange={handleChange}
+      isInfoDetailed={isInfoDetailed}
     />
   );
 
   const comparingTable = (
-    <CompareTable dataToMerge={searchObj} objCompare={selectedResult} />
+    <CompareTable
+      isInfoDetailed={isInfoDetailed}
+      dataToMerge={searchObj}
+      objCompare={selectedResult}
+    />
   );
 
   const singleLocationTable = (
-    <SelectLocationTable dataToMerge={searchObj} objCompare={selectedResult} />
+    <SelectLocationTable
+      isInfoDetailed={isInfoDetailed}
+      objCompare={selectedResult}
+    />
   );
 
   ////// FileSystemAccessAPI ///////
@@ -90,12 +114,50 @@ function MainPage() {
   return (
     <>
       <h3>Location Lookup</h3>
+
       <Paper id="content-box">
         <Box
           sx={{ borderRadius: "16px" }}
           id="tab-component-box"
           className="body-content-boxes"
         >
+      <Box id="global-controls">
+        <FormControl>
+          <FormLabel id="demo-radio-buttons-group-label">
+            Data Displayed
+          </FormLabel>
+          <RadioGroup
+            sx={{ display: "flex", flexDirection: "row" }}
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue="Quick"
+            name="radio-buttons-group"
+            onChange={(e) => handleRadio(e)}
+          >
+            <FormControlLabel
+              sx={{
+                width: "100px",
+                margin: "0",
+                justifyContent: "start",
+              }}
+              value="Quick"
+              control={<Radio size="small" />}
+              label="Quick"
+            />
+            <FormControlLabel
+              value="Detailed"
+              sx={{
+                width: "100px",
+                margin: "0",
+                justifyContent: "center",
+              }}
+              control={<Radio size="small" />}
+              label="Detailed"
+            />
+          </RadioGroup>
+        </FormControl>
+      </Box>
+      <Box id="content-box">
+        <Box id="tab-component-box" className="body-content-boxes">
           <TabComponent
             comparingTable={comparingTable}
             lookupForm={lookupForm}
