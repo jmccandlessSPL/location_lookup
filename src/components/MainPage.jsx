@@ -3,14 +3,17 @@ import LookupForm from "./LookupForm";
 import SearchResults from "./SearchResults";
 import CompareTable from "./CompareTable";
 import { LocationNamingMapMinimized } from "../util/constants";
+
 import {
   Box,
+  Paper,
   FormControl,
   FormControlLabel,
   FormLabel,
   Radio,
   RadioGroup,
 } from "@mui/material";
+
 import TabComponent from "./TabComponent";
 import axios from "axios";
 import SelectLocationTable from "./SelectLcoationTable";
@@ -111,6 +114,13 @@ function MainPage() {
   return (
     <>
       <h3>Location Lookup</h3>
+
+      <Paper id="content-box">
+        <Box
+          sx={{ borderRadius: "16px" }}
+          id="tab-component-box"
+          className="body-content-boxes"
+        >
       <Box id="global-controls">
         <FormControl>
           <FormLabel id="demo-radio-buttons-group-label">
@@ -154,7 +164,16 @@ function MainPage() {
             singleLocationTable={singleLocationTable}
           />
         </Box>
-        <Box id="data-grid-box" className="body-content-boxes">
+        <Box
+          width="1px"
+          backgroundColor="rgba(224, 224, 224, 1)"
+          margin="120px 10px 10px 10px"
+        ></Box>
+        <Box
+          sx={{ borderRadius: "16px" }}
+          id="data-grid-box"
+          className="body-content-boxes"
+        >
           <SearchResults
             searchResults={searchResults}
             setSelectedResult={setSelectedResult}
@@ -163,7 +182,7 @@ function MainPage() {
             setSearchResults={setSearchResults}
           />
         </Box>
-      </Box>
+      </Paper>
     </>
   );
 }

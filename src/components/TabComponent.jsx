@@ -1,6 +1,14 @@
 import React from "react";
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Paper, styled, Tab, Tabs } from "@mui/material";
 import TabPanel from "./TabPanel";
+
+const StyledTab = styled(Tab)(({ theme }) => ({
+  padding: "0px 10px",
+  width: "max-content",
+  minWidth: "0px",
+  maxWidth: "150px",
+  margin: "0 10px",
+}));
 
 function TabComponent(props) {
   const { comparingTable, lookupForm, singleLocationTable } = props;
@@ -15,11 +23,17 @@ function TabComponent(props) {
         <Tabs
           value={value}
           onChange={(e, val) => handleChange(e, val)}
-          sx={{ borderBottom: 1, borderColor: "divider" }}
+          textColor="inherit"
+          scrollButtons={false}
+          sx={{
+            padding: "0px 15px",
+            borderBottom: 1,
+            borderColor: "divider",
+          }}
         >
-          <Tab label="Input" />
-          <Tab label="Compare" />
-          <Tab label="Edit" />
+          <StyledTab className="tab-name" label="Input" />
+          <StyledTab className="tab-name" label="Compare" />
+          <StyledTab className="tab-name" label="Edit" />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>

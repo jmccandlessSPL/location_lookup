@@ -5,6 +5,11 @@ import {
   LocationNamingMap,
 } from "../util/constants";
 import axios from "axios";
+import { Box, styled } from "@mui/material";
+
+const StyledMuiDataGrid = styled(DataGrid)(({ theme }) => ({
+  height: "390px",
+}));
 
 function SearchResults({
   searchResults,
@@ -56,17 +61,23 @@ function SearchResults({
 
   return (
     <>
-      <h2>Location List</h2>
-      <DataGrid
-        onCellClick={(rowData) => setSelectedResult(rowData.row)}
-        rows={searchResults || []}
-        columns={dataColumns || null}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-        checkboxSelection={false}
-        disableMultipleSelection={true}
-        // disableSelectionOnClick
-      />
+      <Box marginTop="50px">
+        <h3>Location List</h3>
+        <StyledMuiDataGrid
+          onCellClick={(rowData) => setSelectedResult(rowData.row)}
+          rows={searchResults || []}
+          columns={dataColumns || null}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          checkboxSelection={false}
+          disableMultipleSelection={true}
+          // autoHeight={true}
+          getRowClassName={(params) =>
+            params.indexRelativeToCurrentPage % 2 === 0 ? "Mui-even" : "Mui-odd"
+          }
+          // disableSelectionOnClick
+        />
+      </Box>
     </>
   );
 }
