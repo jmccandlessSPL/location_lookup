@@ -114,50 +114,47 @@ function MainPage() {
   return (
     <>
       <h3>Location Lookup</h3>
-
       <Paper id="content-box">
         <Box
           sx={{ borderRadius: "16px" }}
           id="tab-component-box"
           className="body-content-boxes"
         >
-      <Box id="global-controls">
-        <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">
-            Data Displayed
-          </FormLabel>
-          <RadioGroup
-            sx={{ display: "flex", flexDirection: "row" }}
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="Quick"
-            name="radio-buttons-group"
-            onChange={(e) => handleRadio(e)}
-          >
-            <FormControlLabel
-              sx={{
-                width: "100px",
-                margin: "0",
-                justifyContent: "start",
-              }}
-              value="Quick"
-              control={<Radio size="small" />}
-              label="Quick"
-            />
-            <FormControlLabel
-              value="Detailed"
-              sx={{
-                width: "100px",
-                margin: "0",
-                justifyContent: "center",
-              }}
-              control={<Radio size="small" />}
-              label="Detailed"
-            />
-          </RadioGroup>
-        </FormControl>
-      </Box>
-      <Box id="content-box">
-        <Box id="tab-component-box" className="body-content-boxes">
+          <Box id="global-controls">
+            <FormControl>
+              <FormLabel id="demo-radio-buttons-group-label">
+                Data Displayed
+              </FormLabel>
+              <RadioGroup
+                sx={{ display: "flex", flexDirection: "row" }}
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="Quick"
+                name="radio-buttons-group"
+                onChange={(e) => handleRadio(e)}
+              >
+                <FormControlLabel
+                  sx={{
+                    width: "100px",
+                    margin: "0",
+                    justifyContent: "start",
+                  }}
+                  value="Quick"
+                  control={<Radio size="small" />}
+                  label="Quick"
+                />
+                <FormControlLabel
+                  value="Detailed"
+                  sx={{
+                    width: "100px",
+                    margin: "0",
+                    justifyContent: "center",
+                  }}
+                  control={<Radio size="small" />}
+                  label="Detailed"
+                />
+              </RadioGroup>
+            </FormControl>
+          </Box>
           <TabComponent
             comparingTable={comparingTable}
             lookupForm={lookupForm}
