@@ -60,7 +60,7 @@ export const LocationNamingMapMinimized = {
   effectiveEndDate: "Effective End Date",
   addrState: "Address State",
   addrCounty: "Address County",
-  lon: "Longitude",
+  // lon: "Longitude",
   lat: "Latitude",
   lng: "Longitude",
   internalProjSysName: "Internal Project System Name",
@@ -71,6 +71,14 @@ export const LocationNamingMapMinimized = {
   createdBy: "Created By",
   createdOn: "Created On",
 };
+
+export const AttNotNeededSingleLocTable = [
+  "lon",
+  "locationChars",
+  "coordLonLat",
+  "id",
+  "keyy",
+];
 
 export const MinimumFieldsSureVue = {
   locName: "Name",

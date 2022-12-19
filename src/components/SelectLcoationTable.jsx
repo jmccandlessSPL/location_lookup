@@ -3,6 +3,7 @@ import { Box, styled, TextField } from "@mui/material";
 
 import "react-diff-view/style/index.css";
 import {
+  AttNotNeededSingleLocTable,
   LocationNamingMap,
   MinimumFieldsSureVue,
   nestedObjManipNONORIG,
@@ -60,8 +61,7 @@ function SelectLocationTable({ objCompare, isInfoDetailed }) {
               isInfoDetailed ? LocationNamingMap : MinimumFieldsSureVue
             )
               ?.filter(
-                (rowTitle) =>
-                  rowTitle !== "id" && rowTitle !== "keyy" && rowTitle !== "lon"
+                (rowTitle) => !AttNotNeededSingleLocTable.includes(rowTitle)
               )
               .sort()
               .map((rowTitle, i) => {

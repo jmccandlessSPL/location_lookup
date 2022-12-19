@@ -31,9 +31,9 @@ function TabComponent(props) {
             borderColor: "divider",
           }}
         >
-          <StyledTab className="tab-name" label="Input" />
-          <StyledTab className="tab-name" label="Compare" />
-          <StyledTab className="tab-name" label="Edit" />
+          <StyledTab className="tab-name" disableRipple label="Input" />
+          <StyledTab className="tab-name" disableRipple label="Compare" />
+          <StyledTab className="tab-name" disableRipple label="Edit" />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
