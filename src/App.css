@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  font-family:  "Roboto","Helvetica","Arial",sans-serif;
+  font-family: Inter var,Roboto,"Helvetica",Arial,sans-serif
 }
 
 /*** Main Page ***/
@@ -30,7 +30,7 @@
 /*** Tab panel ***/
 .tab-panel-component {
   height: 100%;
-  max-height: 452px;
+  max-height: 380px;
 }
 
 .single-tab {

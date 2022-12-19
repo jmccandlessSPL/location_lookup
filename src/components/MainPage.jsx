@@ -12,6 +12,7 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
+  Typography,
 } from "@mui/material";
 
 import TabComponent from "./TabComponent";
@@ -113,7 +114,31 @@ function MainPage() {
 
   return (
     <>
-      <h3>Location Lookup</h3>
+
+      <Box id="app-container" display="grid" gridTemplateRows="auto 1fr">
+        <Box
+          id="nav-bar"
+          display="grid"
+          gridTemplateColumns="1fr 1fr"
+          height="min-content"
+          alignItems="center"
+          backgroundColor="rgb(27,35,48)"
+          borderRadius="5px"
+        >
+          <Typography
+            sx={{
+              // font: '"Inter var", "Roboto","Helvetica","Arial","sans-serif"',
+              color: "rgb(255, 255, 255)",
+              padding: "1.5vw",
+              justifySelf: "left",
+              fontWeight: "600",
+              fontSize: "24px",
+            }}
+            // variant="h4"
+          >
+            Location Lookup
+          </Typography>
+        </Box>
       <Paper id="content-box">
         <Box
           sx={{ borderRadius: "16px" }}
@@ -178,6 +203,7 @@ function MainPage() {
             setFullList={setFullList}
             setSearchResults={setSearchResults}
           />
+
         </Box>
       </Paper>
     </>
