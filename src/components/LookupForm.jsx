@@ -10,6 +10,7 @@ import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 
 const StyledFormControl = styled(FormControl)(({ theme }) => ({
   height: "100%",
+  padding: "7px 0 0 0",
   overflowY: "auto",
   display: "grid",
   gridTemplateColumns: "repeat(3, 1fr [col-start])",

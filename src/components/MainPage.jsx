@@ -114,13 +114,18 @@ function MainPage() {
 
   return (
     <>
-
-      <Box id="app-container" display="grid" gridTemplateRows="auto 1fr">
+      <Box
+        id="app-container"
+        height="100%"
+        display="flex"
+        flexDirection="column"
+      >
         <Box
           id="nav-bar"
+          // height="10vh"
           display="grid"
           gridTemplateColumns="1fr 1fr"
-          height="min-content"
+          // height="min-content"
           alignItems="center"
           backgroundColor="rgb(27,35,48)"
           borderRadius="5px"
@@ -139,73 +144,73 @@ function MainPage() {
             Location Lookup
           </Typography>
         </Box>
-      <Paper id="content-box">
-        <Box
-          sx={{ borderRadius: "16px" }}
-          id="tab-component-box"
-          className="body-content-boxes"
-        >
-          <Box id="global-controls">
-            <FormControl>
-              <FormLabel id="demo-radio-buttons-group-label">
-                Data Displayed
-              </FormLabel>
-              <RadioGroup
-                sx={{ display: "flex", flexDirection: "row" }}
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="Quick"
-                name="radio-buttons-group"
-                onChange={(e) => handleRadio(e)}
-              >
-                <FormControlLabel
-                  sx={{
-                    width: "100px",
-                    margin: "0",
-                    justifyContent: "start",
-                  }}
-                  value="Quick"
-                  control={<Radio size="small" />}
-                  label="Quick"
-                />
-                <FormControlLabel
-                  value="Detailed"
-                  sx={{
-                    width: "100px",
-                    margin: "0",
-                    justifyContent: "center",
-                  }}
-                  control={<Radio size="small" />}
-                  label="Detailed"
-                />
-              </RadioGroup>
-            </FormControl>
+        <Paper id="content-box">
+          <Box
+            sx={{ borderRadius: "16px" }}
+            id="tab-component-box"
+            className="body-content-boxes"
+          >
+            <Box id="global-controls">
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">
+                  Data Displayed
+                </FormLabel>
+                <RadioGroup
+                  sx={{ display: "flex", flexDirection: "row" }}
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue="Quick"
+                  name="radio-buttons-group"
+                  onChange={(e) => handleRadio(e)}
+                >
+                  <FormControlLabel
+                    sx={{
+                      width: "100px",
+                      margin: "0",
+                      justifyContent: "start",
+                    }}
+                    value="Quick"
+                    control={<Radio size="small" />}
+                    label="Quick"
+                  />
+                  <FormControlLabel
+                    value="Detailed"
+                    sx={{
+                      width: "100px",
+                      margin: "0",
+                      justifyContent: "center",
+                    }}
+                    control={<Radio size="small" />}
+                    label="Detailed"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Box>
+            <TabComponent
+              comparingTable={comparingTable}
+              lookupForm={lookupForm}
+              singleLocationTable={singleLocationTable}
+            />
           </Box>
-          <TabComponent
-            comparingTable={comparingTable}
-            lookupForm={lookupForm}
-            singleLocationTable={singleLocationTable}
-          />
-        </Box>
-        <Box
-          width="1px"
-          backgroundColor="rgba(224, 224, 224, 1)"
-          margin="120px 10px 10px 10px"
-        ></Box>
-        <Box
-          sx={{ borderRadius: "16px" }}
-          id="data-grid-box"
-          className="body-content-boxes"
-        >
-          <SearchResults
-            searchResults={searchResults}
-            setSelectedResult={setSelectedResult}
-            setApiError={setApiError}
-            setFullList={setFullList}
-            setSearchResults={setSearchResults}
-          />
-
-        </Box>
-      </Paper>
+          <Box
+            width="1px"
+            backgroundColor="rgba(224, 224, 224, 1)"
+            margin="20px 10px 10px 10px"
+          ></Box>
+          <Box
+            sx={{ borderRadius: "16px" }}
+            id="data-grid-box"
+            className="body-content-boxes"
+          >
+            <SearchResults
+              searchResults={searchResults}
+              setSelectedResult={setSelectedResult}
+              setApiError={setApiError}
+              setFullList={setFullList}
+              setSearchResults={setSearchResults}
+            />
+          </Box>
+        </Paper>
+      </Box>
     </>
   );
 }
