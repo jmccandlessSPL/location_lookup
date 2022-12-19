@@ -3,8 +3,10 @@ import LookupForm from "./LookupForm";
 import SearchResults from "./SearchResults";
 import CompareTable from "./CompareTable";
 import { LocationNamingMapMinimized } from "../util/constants";
+
 import {
   Box,
+  Paper,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -12,6 +14,7 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
+
 import TabComponent from "./TabComponent";
 import axios from "axios";
 import SelectLocationTable from "./SelectLcoationTable";
@@ -111,6 +114,7 @@ function MainPage() {
 
   return (
     <>
+
       <Box id="app-container" display="grid" gridTemplateRows="auto 1fr">
         <Box
           id="nav-bar"
@@ -135,61 +139,73 @@ function MainPage() {
             Location Lookup
           </Typography>
         </Box>
-
-        <Box id="content-box">
-          <Box id="tab-component-box" className="body-content-boxes">
-            <Box id="global-controls">
-              <FormControl sx={{ marginTop: "10px" }}>
-                <FormLabel id="demo-radio-buttons-group-label">
-                  Data Displayed
-                </FormLabel>
-                <RadioGroup
-                  sx={{ display: "flex", flexDirection: "row" }}
-                  aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="Quick"
-                  name="radio-buttons-group"
-                  onChange={(e) => handleRadio(e)}
-                >
-                  <FormControlLabel
-                    sx={{
-                      width: "100px",
-                      margin: "0",
-                      justifyContent: "start",
-                    }}
-                    value="Quick"
-                    control={<Radio size="small" />}
-                    label="Quick"
-                  />
-                  <FormControlLabel
-                    value="Detailed"
-                    sx={{
-                      width: "100px",
-                      margin: "0",
-                      justifyContent: "center",
-                    }}
-                    control={<Radio size="small" />}
-                    label="Detailed"
-                  />
-                </RadioGroup>
-              </FormControl>
-            </Box>
-            <TabComponent
-              comparingTable={comparingTable}
-              lookupForm={lookupForm}
-              singleLocationTable={singleLocationTable}
-            />
+      <Paper id="content-box">
+        <Box
+          sx={{ borderRadius: "16px" }}
+          id="tab-component-box"
+          className="body-content-boxes"
+        >
+          <Box id="global-controls">
+            <FormControl>
+              <FormLabel id="demo-radio-buttons-group-label">
+                Data Displayed
+              </FormLabel>
+              <RadioGroup
+                sx={{ display: "flex", flexDirection: "row" }}
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="Quick"
+                name="radio-buttons-group"
+                onChange={(e) => handleRadio(e)}
+              >
+                <FormControlLabel
+                  sx={{
+                    width: "100px",
+                    margin: "0",
+                    justifyContent: "start",
+                  }}
+                  value="Quick"
+                  control={<Radio size="small" />}
+                  label="Quick"
+                />
+                <FormControlLabel
+                  value="Detailed"
+                  sx={{
+                    width: "100px",
+                    margin: "0",
+                    justifyContent: "center",
+                  }}
+                  control={<Radio size="small" />}
+                  label="Detailed"
+                />
+              </RadioGroup>
+            </FormControl>
           </Box>
-          <Box id="data-grid-box" className="body-content-boxes">
-            <SearchResults
-              searchResults={searchResults}
-              setSelectedResult={setSelectedResult}
-              setApiError={setApiError}
-              setFullList={setFullList}
-              setSearchResults={setSearchResults}
-            />
-          </Box>
+          <TabComponent
+            comparingTable={comparingTable}
+            lookupForm={lookupForm}
+            singleLocationTable={singleLocationTable}
+          />
         </Box>
-      </Box>
+        <Box
+          width="1px"
+          backgroundColor="rgba(224, 224, 224, 1)"
+          margin="120px 10px 10px 10px"
+        ></Box>
+        <Box
+          sx={{ borderRadius: "16px" }}
+          id="data-grid-box"
+          className="body-content-boxes"
+        >
+          <SearchResults
+            searchResults={searchResults}
+            setSelectedResult={setSelectedResult}
+            setApiError={setApiError}
+            setFullList={setFullList}
+            setSearchResults={setSearchResults}
+          />
+
+        </Box>
+      </Paper>
     </>
   );
 }
