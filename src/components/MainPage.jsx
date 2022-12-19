@@ -90,8 +90,8 @@ function MainPage() {
   return (
     <>
       <h3>Location Lookup</h3>
-      <Box id="content-box">
-        <Paper
+      <Paper id="content-box">
+        <Box
           sx={{ borderRadius: "16px" }}
           id="tab-component-box"
           className="body-content-boxes"
@@ -101,8 +101,13 @@ function MainPage() {
             lookupForm={lookupForm}
             singleLocationTable={singleLocationTable}
           />
-        </Paper>
-        <Paper
+        </Box>
+        <Box
+          width="1px"
+          backgroundColor="rgba(224, 224, 224, 1)"
+          margin="120px 10px 10px 10px"
+        ></Box>
+        <Box
           sx={{ borderRadius: "16px" }}
           id="data-grid-box"
           className="body-content-boxes"
@@ -114,8 +119,8 @@ function MainPage() {
             setFullList={setFullList}
             setSearchResults={setSearchResults}
           />
-        </Paper>
-      </Box>
+        </Box>
+      </Paper>
     </>
   );
 }

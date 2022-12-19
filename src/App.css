@@ -7,8 +7,9 @@
 #content-box {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  height: 500px;
+  justify-content: center;
+  height: max-content;
+  border-radius: 16px;
 }
 
 .body-content-boxes {
@@ -17,6 +18,7 @@
   width: 45%;
   height: 500px;
   padding: 10px;
+
 }
 
 /*** Tab Component ***/
