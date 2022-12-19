@@ -9,6 +9,8 @@ const StyledFormControl = styled(FormControl)(({ theme }) => ({
   overflowY: "auto",
   display: "grid",
   gridTemplateColumns: "repeat(3, 1fr [col-start])",
+  border: "1px solid rgba(224, 224, 224, 1)",
+  borderRadius: "4px",
 }));
 
 function LookupForm({ handleChange, searchObj, setSearchObj }) {

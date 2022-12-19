@@ -91,14 +91,22 @@ function MainPage() {
     <>
       <h3>Location Lookup</h3>
       <Box id="content-box">
-        <Paper id="tab-component-box" className="body-content-boxes">
+        <Paper
+          sx={{ borderRadius: "16px" }}
+          id="tab-component-box"
+          className="body-content-boxes"
+        >
           <TabComponent
             comparingTable={comparingTable}
             lookupForm={lookupForm}
             singleLocationTable={singleLocationTable}
           />
         </Paper>
-        <Paper id="data-grid-box" className="body-content-boxes">
+        <Paper
+          sx={{ borderRadius: "16px" }}
+          id="data-grid-box"
+          className="body-content-boxes"
+        >
           <SearchResults
             searchResults={searchResults}
             setSelectedResult={setSelectedResult}
