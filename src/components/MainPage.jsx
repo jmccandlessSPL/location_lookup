@@ -3,7 +3,7 @@ import LookupForm from "./LookupForm";
 import SearchResults from "./SearchResults";
 import CompareTable from "./CompareTable";
 import { LocationNamingMapMinimized } from "../util/constants";
-import { Box } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import TabComponent from "./TabComponent";
 import axios from "axios";
 import SelectLocationTable from "./SelectLcoationTable";
@@ -91,14 +91,14 @@ function MainPage() {
     <>
       <h3>Location Lookup</h3>
       <Box id="content-box">
-        <Box id="tab-component-box" className="body-content-boxes">
+        <Paper id="tab-component-box" className="body-content-boxes">
           <TabComponent
             comparingTable={comparingTable}
             lookupForm={lookupForm}
             singleLocationTable={singleLocationTable}
           />
-        </Box>
-        <Box id="data-grid-box" className="body-content-boxes">
+        </Paper>
+        <Paper id="data-grid-box" className="body-content-boxes">
           <SearchResults
             searchResults={searchResults}
             setSelectedResult={setSelectedResult}
@@ -106,7 +106,7 @@ function MainPage() {
             setFullList={setFullList}
             setSearchResults={setSearchResults}
           />
-        </Box>
+        </Paper>
       </Box>
     </>
   );

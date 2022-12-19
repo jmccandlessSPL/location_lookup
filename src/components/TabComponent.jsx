@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Paper, Tab, Tabs } from "@mui/material";
 import TabPanel from "./TabPanel";
 
 function TabComponent(props) {

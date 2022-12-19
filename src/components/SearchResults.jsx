@@ -65,6 +65,9 @@ function SearchResults({
         rowsPerPageOptions={[10]}
         checkboxSelection={false}
         disableMultipleSelection={true}
+        getRowClassName={(params) =>
+          params.indexRelativeToCurrentPage % 2 === 0 ? "Mui-even" : "Mui-odd"
+        }
         // disableSelectionOnClick
       />
     </>

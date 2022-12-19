@@ -16,6 +16,7 @@
   flex-direction: column;
   width: 45%;
   height: 500px;
+  padding: 10px;
 }
 
 /*** Tab Component ***/
@@ -100,6 +101,13 @@ tr {
 tr:nth-child(even) > td {
   filter: brightness(.90);
 }
+
+.Mui-even {
+  /*filter: brightness(.90);*/
+  background-color: #e3e3e3;
+}
+
+
 
 pre {
   font-family: inherit;
