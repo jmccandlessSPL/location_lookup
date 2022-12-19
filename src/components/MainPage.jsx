@@ -115,13 +115,25 @@ function MainPage() {
         <Box
           id="nav-bar"
           display="grid"
-          gridTemplateColumns="1fr 1fr 1fr"
-          height="8vh"
+          gridTemplateColumns="1fr 1fr"
+          height="min-content"
           alignItems="center"
-          backgroundColor="#68a696"
+          backgroundColor="rgb(27,35,48)"
           borderRadius="5px"
         >
-          <Typography variant="h3">Location Lookup</Typography>
+          <Typography
+            sx={{
+              // font: '"Inter var", "Roboto","Helvetica","Arial","sans-serif"',
+              color: "rgb(255, 255, 255)",
+              padding: "1.5vw",
+              justifySelf: "left",
+              fontWeight: "600",
+              fontSize: "24px",
+            }}
+            // variant="h4"
+          >
+            Location Lookup
+          </Typography>
         </Box>
 
         <Box id="content-box">
